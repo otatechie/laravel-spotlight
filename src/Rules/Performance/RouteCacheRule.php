@@ -1,0 +1,54 @@
+<?php
+
+namespace AtoAugustine\Beacon\Rules\Performance;
+
+use AtoAugustine\Beacon\Rules\AbstractRule;
+
+class RouteCacheRule extends AbstractRule
+{
+    public function getId(): string
+    {
+        return 'performance.route-cache';
+    }
+
+    public function getCategory(): string
+    {
+        return 'performance';
+    }
+
+    public function getSeverity(): string
+    {
+        return 'info';
+    }
+
+    public function getName(): string
+    {
+        return 'Route Cache Check';
+    }
+
+    public function getDescription(): string
+    {
+        return 'Checks if route cache is enabled in production';
+    }
+
+    public function scan(): array
+    {
+        if (! app()->environment('production')) {
+            return $this->pass('Not in production environment');
+        }
+
+        $routeCached = file_exists(base_path('bootstrap/cache/routes-v7.php')) 
+            || file_exists(base_path('bootstrap/cache/routes.php'));
+
+        if (! $routeCached) {
+            return $this->suggest(
+                'Route cache could improve performance in production',
+                [
+                    'recommendation' => 'Run `php artisan route:cache` to cache your routes',
+                ]
+            );
+        }
+
+        return $this->pass('Route cache is enabled');
+    }
+}

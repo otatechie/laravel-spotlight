@@ -34,8 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "AtoAugustine\\Beacon\\": "src/",
-            "AtoAugustine\\Beacon\\Database\\Factories\\": "database/factories/"
+            "AtoAugustine\\Beacon\\": "src/"
         }
     },
     "autoload-dev": {
