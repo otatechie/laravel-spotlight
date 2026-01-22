@@ -94,15 +94,20 @@ class BeaconCommand extends Command
 
         $this->info('Summary');
         $this->line('────────────────────');
-        $this->table(
-            ['Severity', 'Count'],
-            [
-                ['Critical', $summary['critical'] ?? 0],
-                ['High', $summary['high'] ?? 0],
-                ['Medium', $summary['medium'] ?? 0],
-                ['Low', $summary['low'] ?? 0],
-            ]
-        );
+        
+        // Build colored table rows
+        $rows = [];
+        $critical = $summary['critical'] ?? 0;
+        $high = $summary['high'] ?? 0;
+        $medium = $summary['medium'] ?? 0;
+        $low = $summary['low'] ?? 0;
+        
+        $rows[] = [$this->colorizeSeverity('Critical', 'critical'), $critical];
+        $rows[] = [$this->colorizeSeverity('High', 'high'), $high];
+        $rows[] = [$this->colorizeSeverity('Medium', 'medium'), $medium];
+        $rows[] = [$this->colorizeSeverity('Low', 'low'), $low];
+        
+        $this->table(['Severity', 'Count'], $rows);
 
         $healthScore = $summary['health_score'] ?? 100;
         $this->newLine();
@@ -166,19 +171,38 @@ class BeaconCommand extends Command
         // Get severity label and emoji
         $severityLabel = strtoupper($severity);
         $emoji = Severity::emoji($severity);
+        
+        // Colorize the severity label
+        $coloredSeverity = $this->colorizeSeverity($severityLabel, $severity);
 
         // Format based on type
         if ($type === 'objective') {
             // Objective: Show severity clearly
-            $this->line("{$emoji} [{$severityLabel}] {$message}");
+            $this->line("{$emoji} [{$coloredSeverity}] {$message}");
         } else {
             // Advisory: Gentler tone
-            $this->line("{$emoji} [{$severityLabel}] {$message}");
+            $this->line("{$emoji} [{$coloredSeverity}] {$message}");
         }
 
         // Show recommendation if available
         if (isset($ruleResult['metadata']['recommendation'])) {
             $this->comment("→ {$ruleResult['metadata']['recommendation']}");
         }
+    }
+
+    protected function colorizeSeverity(string $text, string $severity): string
+    {
+        // Check if color output is enabled
+        if (! $this->output->isDecorated()) {
+            return $text;
+        }
+
+        return match ($severity) {
+            'critical' => "<fg=red>{$text}</>",
+            'high' => "<fg=yellow>{$text}</>",
+            'medium' => "<fg=cyan>{$text}</>",
+            'low' => "<fg=blue>{$text}</>",
+            default => $text,
+        };
     }
 }
