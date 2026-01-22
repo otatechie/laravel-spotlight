@@ -3,8 +3,8 @@
 A lighthouse-style diagnostics tool that scans Laravel applications for performance, security, and architecture issues. Built with a modular rule system that makes it easy to extend and customize.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/otatechie/laravel-spotlight.svg?style=flat-square)](https://packagist.org/packages/otatechie/laravel-spotlight)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/otatechie/laravel-spotlight/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/otatechie/laravel-spotlight/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/otatechie/laravel-spotlight/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/otatechie/laravel-spotlight/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![GitHub Tests](https://img.shields.io/github/actions/workflow/status/otatechie/laravel-spotlight/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/otatechie/laravel-spotlight/actions/workflows/run-tests.yml)
+[![Code Style](https://img.shields.io/github/actions/workflow/status/otatechie/laravel-spotlight/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/otatechie/laravel-spotlight/actions/workflows/fix-php-code-style-issues.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/otatechie/laravel-spotlight.svg?style=flat-square)](https://packagist.org/packages/otatechie/laravel-spotlight)
 
 ## What is Spotlight?
