@@ -1,14 +1,14 @@
 <?php
 
-namespace AtoAugustine\Beacon\Commands;
+namespace Otatechie\Spotlight\Commands;
 
-use AtoAugustine\Beacon\Beacon;
-use AtoAugustine\Beacon\Severity;
+use Otatechie\Spotlight\Spotlight;
+use Otatechie\Spotlight\Severity;
 use Illuminate\Console\Command;
 
-class BeaconCommand extends Command
+class SpotlightCommand extends Command
 {
-    public $signature = 'beacon:scan
+    public $signature = 'spotlight:scan
                         {--format=table : Output format (table, json)}
                         {--category=* : Specific categories to scan (performance, security, architecture)}
                         {--severity= : Minimum severity level (info, warning, critical)}
@@ -16,7 +16,7 @@ class BeaconCommand extends Command
 
     public $description = 'Scan Laravel application for performance, security, and architecture insights';
 
-    public function handle(Beacon $beacon): int
+    public function handle(Spotlight $spotlight): int
     {
         $startTime = microtime(true);
 
@@ -26,7 +26,7 @@ class BeaconCommand extends Command
         $format = $this->option('format');
         $failOn = $this->option('fail-on');
 
-        $results = $beacon->scan($categories);
+        $results = $spotlight->scan($categories);
 
         if ($format === 'json') {
             $this->line(json_encode($results, JSON_PRETTY_PRINT));
@@ -43,7 +43,7 @@ class BeaconCommand extends Command
 
     protected function displayHeader(): void
     {
-        $this->info('Laravel Beacon Scan');
+        $this->info('Laravel Spotlight Scan');
         $this->line('────────────────────');
         $this->newLine();
 

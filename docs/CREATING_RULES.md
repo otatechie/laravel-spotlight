@@ -1,14 +1,14 @@
-# Creating Custom Rules for Laravel Beacon
+# Creating Custom Rules for Laravel Spotlight
 
-This guide will help you create custom rules for Laravel Beacon to scan your application for specific issues.
+This guide will help you create custom rules for Laravel Spotlight to scan your application for specific issues.
 
 ## Rule Structure
 
-All rules must implement the `AtoAugustine\Beacon\Rules\RuleInterface` interface. The easiest way to create a rule is to extend the `AbstractRule` base class.
+All rules must implement the `Otatechie\Spotlight\Rules\RuleInterface` interface. The easiest way to create a rule is to extend the `AbstractRule` base class.
 
 ## Rule Types
 
-Beacon supports two rule types:
+Spotlight supports two rule types:
 
 - **Objective** (`type: 'objective'`) - Firm recommendations for security, performance, misconfigurations
 - **Advisory** (`type: 'advisory'`) - Gentle suggestions for architecture, style, structure
@@ -17,14 +17,14 @@ See the "Rule Design Guidelines" section below for detailed guidance on when to 
 
 ## Basic Rule Example (Clean & DRY)
 
-Laravel Beacon uses convention-based auto-detection! You only need to define what's different:
+Laravel Spotlight uses convention-based auto-detection! You only need to define what's different:
 
 ```php
 <?php
 
-namespace App\Beacon\Rules\Performance; // Category auto-detected from namespace!
+namespace App\Spotlight\Rules\Performance; // Category auto-detected from namespace!
 
-use AtoAugustine\Beacon\Rules\AbstractRule;
+use Otatechie\Spotlight\Rules\AbstractRule;
 
 class MyCustomRule extends AbstractRule
 {
@@ -106,12 +106,12 @@ Both `fail()` and `pass()` return an array with the following structure:
 
 ### Method 1: Via Config File
 
-Add your rule class to the `custom_rules` array in `config/beacon.php`:
+Add your rule class to the `custom_rules` array in `config/spotlight.php`:
 
 ```php
 return [
     'custom_rules' => [
-        \App\Beacon\Rules\MyCustomRule::class,
+        \App\Spotlight\Rules\MyCustomRule::class,
     ],
 ];
 ```
@@ -121,12 +121,12 @@ return [
 Register your rule in a service provider:
 
 ```php
-use AtoAugustine\Beacon\Rules\RuleRegistry;
+use Otatechie\Spotlight\Rules\RuleRegistry;
 
 public function boot()
 {
     $registry = app(RuleRegistry::class);
-    $registry->register(\App\Beacon\Rules\MyCustomRule::class);
+    $registry->register(\App\Spotlight\Rules\MyCustomRule::class);
 }
 ```
 
@@ -154,9 +154,9 @@ Here's a more complex example that checks multiple conditions:
 ```php
 <?php
 
-namespace App\Beacon\Rules;
+namespace App\Spotlight\Rules;
 
-use AtoAugustine\Beacon\Rules\AbstractRule;
+use Otatechie\Spotlight\Rules\AbstractRule;
 use Illuminate\Support\Facades\File;
 
 class ComplexRule extends AbstractRule
@@ -220,27 +220,27 @@ class ComplexRule extends AbstractRule
 You can test your rules by running:
 
 ```bash
-php artisan beacon:scan --category=custom
+php artisan spotlight:scan --category=custom
 ```
 
 Or test all rules:
 
 ```bash
-php artisan beacon:scan
+php artisan spotlight:scan
 ```
 
 ## Best Practices
 
 1. **Use descriptive IDs**: Make rule IDs unique and descriptive (e.g., `custom.my-feature-check`)
 2. **Provide recommendations**: Always include a `recommendation` in metadata when a rule fails
-3. **Handle errors gracefully**: Your rule should not throw exceptions - let Beacon handle that
+3. **Handle errors gracefully**: Your rule should not throw exceptions - let Spotlight handle that
 4. **Keep rules focused**: Each rule should check one specific thing
 5. **Use appropriate severity**: Don't mark everything as critical
 6. **Add metadata**: Include useful information in the metadata array
 
 ## Disabling Rules
 
-You can disable rules in `config/beacon.php`:
+You can disable rules in `config/spotlight.php`:
 
 ```php
 return [
@@ -254,13 +254,13 @@ return [
 
 ### Philosophy
 
-**Beacon provides guidance, not enforcement.**
+**Spotlight provides guidance, not enforcement.**
 
 Rules should inform and suggest, not judge or shame. We aim to be a friendly mentor, not an angry linter.
 
 ### Performance Guidelines
 
-**Rules MUST be fast.** Beacon should feel instant, not slow.
+**Rules MUST be fast.** Spotlight should feel instant, not slow.
 
 **✅ DO:**
 - Check config values: `config('app.debug')`

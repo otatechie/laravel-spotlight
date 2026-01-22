@@ -1,6 +1,6 @@
-# Why Laravel Beacon? What Makes It Different?
+# Why Laravel Spotlight? What Makes It Different?
 
-This document explains what makes Laravel Beacon unique compared to other Laravel diagnostic and analysis tools.
+This document explains what makes Laravel Spotlight unique compared to other Laravel diagnostic and analysis tools.
 
 ## The Problem with Most Scanners
 
@@ -13,7 +13,7 @@ Most diagnostic tools are:
 - ❌ **Complex** - Hard to extend or customize
 - ❌ **Judgmental** - Use harsh language that discourages developers
 
-## How Beacon is Different
+## How Spotlight is Different
 
 ### 1. 🎯 **Friendly Mentor, Not Angry Linter**
 
@@ -24,13 +24,13 @@ Most diagnostic tools are:
 ❌ CRITICAL: You should be ashamed
 ```
 
-**Beacon:**
+**Spotlight:**
 ```
 💡 [RECOMMENDATION] Config cache could improve performance
 → Run `php artisan config:cache` to cache your configuration
 ```
 
-**Philosophy:** Beacon informs and suggests, never judges or shames.
+**Philosophy:** Spotlight informs and suggests, never judges or shames.
 
 ### 2. 🎛️ **User Control - Every Rule is Disableable**
 
@@ -39,15 +39,15 @@ Most diagnostic tools are:
 - No way to disable rules that don't apply
 - Forces one-size-fits-all approach
 
-**Beacon:**
+**Spotlight:**
 ```php
-// config/beacon.php
+// config/spotlight.php
 'enabled_rules' => [
     'architecture.large-controller' => false, // Disable if not applicable
 ],
 ```
 
-**Philosophy:** You know your project best. Beacon gives you control.
+**Philosophy:** You know your project best. Spotlight gives you control.
 
 ### 3. 📊 **Objective vs Advisory Rules**
 
@@ -55,7 +55,7 @@ Most diagnostic tools are:
 - Everything is treated the same
 - Architecture opinions = Security issues
 
-**Beacon:**
+**Spotlight:**
 - **Objective Rules** - Firm recommendations (security, performance)
   - Displayed as: `[SECURITY RISK]`, `[PERFORMANCE ISSUE]`
 - **Advisory Rules** - Gentle suggestions (architecture, style)
@@ -71,7 +71,7 @@ Most diagnostic tools are:
 - Make HTTP/API calls
 - Take 10-30+ seconds
 
-**Beacon:**
+**Spotlight:**
 - Lightweight checks (config, file existence, patterns)
 - No database queries
 - No external calls
@@ -86,7 +86,7 @@ Most diagnostic tools are:
 - Requires understanding complex internals
 - Lots of boilerplate code
 
-**Beacon:**
+**Spotlight:**
 ```php
 class MyRule extends AbstractRule
 {
@@ -114,7 +114,7 @@ public function getName() { return '...'; }
 public function getDescription() { return '...'; }
 ```
 
-**Beacon:**
+**Spotlight:**
 ```php
 // Just 2-3 properties - everything else auto-detected!
 protected string $description = 'Checks something';
@@ -128,7 +128,7 @@ protected string $description = 'Checks something';
 - One rule failure crashes entire scan
 - No graceful degradation
 
-**Beacon:**
+**Spotlight:**
 - Single rule failures don't crash scans
 - Errors are logged and reported
 - Configurable error handling (`continue` or `stop`)
@@ -142,7 +142,7 @@ protected string $description = 'Checks something';
 - "This is WRONG"
 - "Bad practice detected"
 
-**Beacon:**
+**Spotlight:**
 - "Could improve performance"
 - "Consider using..."
 - "May benefit from..."
@@ -151,7 +151,7 @@ protected string $description = 'Checks something';
 
 ## Comparison Table
 
-| Feature | Other Tools | Laravel Beacon |
+| Feature | Other Tools | Laravel Spotlight |
 |---------|------------|----------------|
 | **Tone** | Aggressive, judgmental | Friendly, helpful |
 | **Rule Control** | Limited/None | Full control (enable/disable) |
@@ -171,7 +171,7 @@ protected string $description = 'Checks something';
 - "This tool is too opinionated"
 - "It doesn't fit our project"
 
-**Beacon:**
+**Spotlight:**
 - Developers install, see helpful suggestions, keep using
 - "This tool is actually helpful"
 - "I can disable what doesn't apply"
@@ -183,9 +183,9 @@ protected string $description = 'Checks something';
 - Response: "Tough, that's how it works"
 - Result: Fork or abandon
 
-**Beacon:**
+**Spotlight:**
 - GitHub issues: "This rule doesn't fit my project"
-- Response: "Disable it in config/beacon.php"
+- Response: "Disable it in config/spotlight.php"
 - Result: Happy user, continued adoption
 
 ### Long-Term Success
@@ -195,7 +195,7 @@ protected string $description = 'Checks something';
 - Drop-off as users hit rigid rules
 - Maintenance burden from forks
 
-**Beacon:**
+**Spotlight:**
 - Steady adoption
 - Users customize to fit their needs
 - Community contributions (custom rules)
@@ -222,7 +222,7 @@ protected string $description = 'Checks something';
 - No heavy file scanning
 - No external dependencies
 
-## Use Cases Where Beacon Shines
+## Use Cases Where Spotlight Shines
 
 ✅ **Teams with diverse codebases** - Can disable rules that don't apply  
 ✅ **Projects in transition** - Gentle suggestions, not harsh enforcement  
@@ -232,13 +232,13 @@ protected string $description = 'Checks something';
 
 ## When to Use Other Tools
 
-Beacon is **not** a replacement for:
-- **Laravel Debugbar** - Runtime debugging (Beacon is static)
-- **Laravel Telescope** - Application monitoring (Beacon is one-time scans)
-- **PHPStan/Larastan** - Type checking (Beacon is pattern-based)
-- **Laravel Pint** - Code formatting (Beacon is diagnostics)
+Spotlight is **not** a replacement for:
+- **Laravel Debugbar** - Runtime debugging (Spotlight is static)
+- **Laravel Telescope** - Application monitoring (Spotlight is one-time scans)
+- **PHPStan/Larastan** - Type checking (Spotlight is pattern-based)
+- **Laravel Pint** - Code formatting (Spotlight is diagnostics)
 
-Beacon **complements** these tools by providing:
+Spotlight **complements** these tools by providing:
 - Quick health checks
 - Architecture guidance
 - Performance suggestions
@@ -246,7 +246,7 @@ Beacon **complements** these tools by providing:
 
 ## Summary
 
-Laravel Beacon is different because it's built on a foundation of:
+Laravel Spotlight is different because it's built on a foundation of:
 
 1. **Respect** - Respects that developers know their projects
 2. **Flexibility** - Adapts to different needs and contexts
@@ -258,4 +258,4 @@ Laravel Beacon is different because it's built on a foundation of:
 
 ---
 
-*"Beacon provides guidance, not enforcement. We're here to help you build better Laravel applications, not to judge how you build them."*
+*"Spotlight provides guidance, not enforcement. We're here to help you build better Laravel applications, not to judge how you build them."*

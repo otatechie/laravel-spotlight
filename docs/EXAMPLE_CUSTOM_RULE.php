@@ -11,7 +11,7 @@
 
 namespace App\Beacon\Rules;
 
-use AtoAugustine\Beacon\Rules\AbstractRule;
+use Otatechie\Beacon\Rules\AbstractRule;
 use Illuminate\Support\Facades\File;
 
 class ExampleCustomRule extends AbstractRule

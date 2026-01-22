@@ -1,12 +1,12 @@
 <?php
 
-use AtoAugustine\Beacon\Beacon;
-use AtoAugustine\Beacon\Rules\RuleRegistry;
+use Otatechie\Spotlight\Spotlight;
+use Otatechie\Spotlight\Rules\RuleRegistry;
 
 it('can scan all categories by default', function () {
     $registry = app(RuleRegistry::class);
-    $beacon = new Beacon($registry);
-    $results = $beacon->scan();
+    $spotlight = new Spotlight($registry);
+    $results = $spotlight->scan();
 
     expect($results)
         ->toHaveKey('timestamp')
@@ -17,8 +17,8 @@ it('can scan all categories by default', function () {
 
 it('can scan specific categories', function () {
     $registry = app(RuleRegistry::class);
-    $beacon = new Beacon($registry);
-    $results = $beacon->scan(['security']);
+    $spotlight = new Spotlight($registry);
+    $results = $spotlight->scan(['security']);
 
     // Should only have security category rules
     $hasSecurityRules = false;
@@ -34,8 +34,8 @@ it('can scan specific categories', function () {
 
 it('returns structured results with summary', function () {
     $registry = app(RuleRegistry::class);
-    $beacon = new Beacon($registry);
-    $results = $beacon->scan();
+    $spotlight = new Spotlight($registry);
+    $results = $spotlight->scan();
 
     expect($results['summary'])
         ->toHaveKey('total_rules')
@@ -46,8 +46,8 @@ it('returns structured results with summary', function () {
 
 it('returns category results with rules array', function () {
     $registry = app(RuleRegistry::class);
-    $beacon = new Beacon($registry);
-    $results = $beacon->scan(['security']);
+    $spotlight = new Spotlight($registry);
+    $results = $spotlight->scan(['security']);
 
     if (isset($results['categories']['security'])) {
         $securityCategory = $results['categories']['security'];

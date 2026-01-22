@@ -1,8 +1,8 @@
 <?php
 
-namespace AtoAugustine\Beacon\Rules\Architecture;
+namespace Otatechie\Spotlight\Rules\Architecture;
 
-use AtoAugustine\Beacon\Rules\AbstractRule;
+use Otatechie\Spotlight\Rules\AbstractRule;
 use Illuminate\Support\Facades\File;
 
 class RouteClosureUsageRule extends AbstractRule

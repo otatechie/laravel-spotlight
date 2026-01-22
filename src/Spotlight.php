@@ -1,12 +1,12 @@
 <?php
 
-namespace AtoAugustine\Beacon;
+namespace Otatechie\Spotlight;
 
-use AtoAugustine\Beacon\Rules\RuleInterface;
-use AtoAugustine\Beacon\Rules\RuleRegistry;
+use Otatechie\Spotlight\Rules\RuleInterface;
+use Otatechie\Spotlight\Rules\RuleRegistry;
 use Illuminate\Support\Facades\Log;
 
-class Beacon
+class Spotlight
 {
     public function __construct(
         protected RuleRegistry $registry
@@ -126,28 +126,28 @@ class Beacon
      */
     protected function executeRule(RuleInterface $rule): array
     {
-        $debug = config('beacon.debug', false);
+        $debug = config('spotlight.debug', false);
 
         try {
             if ($debug) {
-                Log::debug("Beacon: Executing rule {$rule->getId()}");
+                Log::debug("Spotlight: Executing rule {$rule->getId()}");
             }
 
             $result = $rule->scan();
 
             if ($debug) {
-                Log::debug("Beacon: Rule {$rule->getId()} completed with status: {$result['status']}");
+                Log::debug("Spotlight: Rule {$rule->getId()} completed with status: {$result['status']}");
             }
 
             return $result;
         } catch (\Throwable $e) {
-            $errorHandling = config('beacon.error_handling', 'continue');
+            $errorHandling = config('spotlight.error_handling', 'continue');
 
             if ($errorHandling === 'stop') {
                 throw $e;
             }
 
-            Log::warning("Beacon rule {$rule->getId()} encountered an issue: {$e->getMessage()}", [
+                Log::warning("Spotlight rule {$rule->getId()} encountered an issue: {$e->getMessage()}", [
                 'exception' => get_class($e),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),

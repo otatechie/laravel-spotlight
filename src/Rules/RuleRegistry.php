@@ -1,6 +1,6 @@
 <?php
 
-namespace AtoAugustine\Beacon\Rules;
+namespace Otatechie\Spotlight\Rules;
 
 class RuleRegistry
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace AtoAugustine\Beacon\Commands;
+namespace Otatechie\Spotlight\Commands;
 
-use AtoAugustine\Beacon\Rules\RuleRegistry;
+use Otatechie\Spotlight\Rules\RuleRegistry;
 use Illuminate\Console\Command;
 
 class ListRulesCommand extends Command
 {
-    public $signature = 'beacon:rules
+    public $signature = 'spotlight:rules
                         {--rule= : Show details for a specific rule}';
 
-    public $description = 'List all available Beacon rules';
+    public $description = 'List all available Spotlight rules';
 
     public function handle(RuleRegistry $registry): int
     {
@@ -25,7 +25,7 @@ class ListRulesCommand extends Command
 
     protected function listAllRules(RuleRegistry $registry): int
     {
-        $this->info('📋 Available Beacon Rules');
+        $this->info('📋 Available Spotlight Rules');
         $this->newLine();
 
         $rules = $registry->all();
@@ -51,7 +51,7 @@ class ListRulesCommand extends Command
             $this->newLine();
         }
 
-        $this->comment("Use 'php artisan beacon:rules --rule=<rule-id>' for detailed information");
+        $this->comment("Use 'php artisan spotlight:rules --rule=<rule-id>' for detailed information");
 
         return self::SUCCESS;
     }
@@ -62,7 +62,7 @@ class ListRulesCommand extends Command
 
         if (! $rule) {
             $this->error("Rule '{$ruleId}' not found.");
-            $this->comment("Use 'php artisan beacon:rules' to see all available rules.");
+            $this->comment("Use 'php artisan spotlight:rules' to see all available rules.");
 
             return self::FAILURE;
         }
@@ -83,7 +83,7 @@ class ListRulesCommand extends Command
         );
 
         $this->newLine();
-        $this->comment('To disable this rule, add to config/beacon.php:');
+        $this->comment('To disable this rule, add to config/spotlight.php:');
         $this->line("'enabled_rules' => [");
         $this->line("    '{$ruleId}' => false,");
         $this->line('],');

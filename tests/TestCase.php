@@ -1,8 +1,8 @@
 <?php
 
-namespace AtoAugustine\Beacon\Tests;
+namespace Otatechie\Spotlight\Tests;
 
-use AtoAugustine\Beacon\BeaconServiceProvider;
+use Otatechie\Spotlight\SpotlightServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -15,7 +15,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            BeaconServiceProvider::class,
+            SpotlightServiceProvider::class,
         ];
     }
 

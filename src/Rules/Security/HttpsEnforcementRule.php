@@ -1,8 +1,8 @@
 <?php
 
-namespace AtoAugustine\Beacon\Rules\Security;
+namespace Otatechie\Spotlight\Rules\Security;
 
-use AtoAugustine\Beacon\Rules\AbstractRule;
+use Otatechie\Spotlight\Rules\AbstractRule;
 
 class HttpsEnforcementRule extends AbstractRule
 {

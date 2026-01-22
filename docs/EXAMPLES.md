@@ -1,6 +1,6 @@
-# Laravel Beacon Examples
+# Laravel Spotlight Examples
 
-This document provides practical examples and advanced usage patterns for Laravel Beacon.
+This document provides practical examples and advanced usage patterns for Laravel Spotlight.
 
 > **Basic usage examples are in the [README](../README.md#usage).** This document focuses on advanced configuration and integration patterns.
 
@@ -8,7 +8,7 @@ This document provides practical examples and advanced usage patterns for Larave
 
 ### Disable Specific Rules
 
-Edit `config/beacon.php`:
+Edit `config/spotlight.php`:
 
 ```php
 return [
@@ -21,13 +21,13 @@ return [
 
 ### Add Custom Rules
 
-Edit `config/beacon.php`:
+Edit `config/spotlight.php`:
 
 ```php
 return [
     'custom_rules' => [
-        \App\Beacon\Rules\MyCustomRule::class,
-        \App\Beacon\Rules\AnotherRule::class,
+        \App\Spotlight\Rules\MyCustomRule::class,
+        \App\Spotlight\Rules\AnotherRule::class,
     ],
 ];
 ```
@@ -60,20 +60,20 @@ BEACON_DEBUG=true
 
 ## Programmatic Usage
 
-### Using Beacon in Code
+### Using Spotlight in Code
 
 ```php
-use AtoAugustine\Beacon\Beacon;
-use AtoAugustine\Beacon\Rules\RuleRegistry;
+use Otatechie\Spotlight\Spotlight;
+use Otatechie\Spotlight\Rules\RuleRegistry;
 
-// Get Beacon instance
-$beacon = app(Beacon::class);
+// Get Spotlight instance
+$spotlight = app(Spotlight::class);
 
 // Run all scans
-$results = $beacon->scan();
+$results = $spotlight->scan();
 
 // Scan specific categories
-$results = $beacon->scan(['performance', 'security']);
+$results = $spotlight->scan(['performance', 'security']);
 
 // Access results
 $summary = $results['summary'];
@@ -84,17 +84,17 @@ $rules = $results['rules'];
 ### Register Rules Programmatically
 
 ```php
-use AtoAugustine\Beacon\Rules\RuleRegistry;
+use Otatechie\Spotlight\Rules\RuleRegistry;
 
 $registry = app(RuleRegistry::class);
 
 // Register a single rule
-$registry->register(\App\Beacon\Rules\MyRule::class);
+$registry->register(\App\Spotlight\Rules\MyRule::class);
 
 // Register multiple rules
 $registry->registerMany([
-    \App\Beacon\Rules\Rule1::class,
-    \App\Beacon\Rules\Rule2::class,
+    \App\Spotlight\Rules\Rule1::class,
+    \App\Spotlight\Rules\Rule2::class,
 ]);
 
 // Get rules by category
@@ -109,7 +109,7 @@ $criticalRules = $registry->bySeverity('critical');
 ### GitHub Actions Example
 
 ```yaml
-name: Beacon Scan
+name: Spotlight Scan
 
 on: [push, pull_request]
 
@@ -127,40 +127,40 @@ jobs:
       - name: Install Dependencies
         run: composer install
       
-      - name: Run Beacon Scan
-        run: php artisan beacon:scan --format=json > beacon-results.json
+      - name: Run Spotlight Scan
+        run: php artisan spotlight:scan --format=json > spotlight-results.json
       
       - name: Upload Results
         uses: actions/upload-artifact@v3
         with:
-          name: beacon-results
-          path: beacon-results.json
+          name: spotlight-results
+          path: spotlight-results.json
 ```
 
 ### GitLab CI Example
 
 ```yaml
-beacon-scan:
+spotlight-scan:
   stage: test
   script:
     - composer install
-    - php artisan beacon:scan --format=json > beacon-results.json
+    - php artisan spotlight:scan --format=json > spotlight-results.json
   artifacts:
     paths:
-      - beacon-results.json
+      - spotlight-results.json
     expire_in: 1 week
 ```
 
 ## Custom Rule Example
 
-Here's a complete example using Beacon's clean auto-detection approach:
+Here's a complete example using Spotlight's clean auto-detection approach:
 
 ```php
 <?php
 
-namespace App\Beacon\Rules\Performance; // Category auto-detected!
+namespace App\Spotlight\Rules\Performance; // Category auto-detected!
 
-use AtoAugustine\Beacon\Rules\AbstractRule;
+use Otatechie\Spotlight\Rules\AbstractRule;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseConnectionRule extends AbstractRule
@@ -192,12 +192,12 @@ class DatabaseConnectionRule extends AbstractRule
 }
 ```
 
-Register it in `config/beacon.php`:
+Register it in `config/spotlight.php`:
 
 ```php
 return [
     'custom_rules' => [
-        \App\Beacon\Rules\Performance\DatabaseConnectionRule::class,
+        \App\Spotlight\Rules\Performance\DatabaseConnectionRule::class,
     ],
 ];
 ```

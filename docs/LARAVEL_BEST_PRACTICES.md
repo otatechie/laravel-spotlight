@@ -1,6 +1,6 @@
 # Laravel Architecture Best Practices Resources
 
-This document lists authoritative sources for Laravel architecture best practices that can be used to create architecture rules for Laravel Beacon.
+This document lists authoritative sources for Laravel architecture best practices that can be used to create architecture rules for Laravel Spotlight.
 
 ## Official Laravel Documentation
 

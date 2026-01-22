@@ -1,6 +1,6 @@
 <?php
 
-namespace AtoAugustine\Beacon\Rules;
+namespace Otatechie\Spotlight\Rules;
 
 abstract class AbstractRule implements RuleInterface
 {
@@ -61,7 +61,7 @@ abstract class AbstractRule implements RuleInterface
         }
 
         // Auto-detect from namespace
-        // e.g., "AtoAugustine\Beacon\Rules\Performance\ConfigCacheRule" -> "performance"
+        // e.g., "Otatechie\Spotlight\Rules\Performance\ConfigCacheRule" -> "performance"
         $namespace = get_class($this);
         if (preg_match('/\\\Rules\\\([^\\\\]+)\\\/', $namespace, $matches)) {
             return strtolower($matches[1]);

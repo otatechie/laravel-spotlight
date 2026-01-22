@@ -1,6 +1,6 @@
 <?php
 
-namespace AtoAugustine\Beacon\Commands;
+namespace Otatechie\Spotlight\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -8,13 +8,13 @@ use Illuminate\Support\Str;
 
 class MakeRuleCommand extends Command
 {
-    public $signature = 'beacon:make-rule
+    public $signature = 'spotlight:make-rule
                         {name : The name of the rule class}
                         {--category= : Category (performance, security, architecture)}
                         {--type=advisory : Rule type (objective or advisory)}
                         {--severity=info : Severity level (info, warning, critical)}';
 
-    public $description = 'Create a new Beacon rule class';
+    public $description = 'Create a new Spotlight rule class';
 
     public function handle(): int
     {
@@ -33,8 +33,8 @@ class MakeRuleCommand extends Command
         $ruleId = strtolower($category).'.'.Str::kebab(Str::replaceLast('Rule', '', $className));
 
         // Determine namespace based on category
-        $namespace = "App\\Beacon\\Rules\\{$categoryNamespace}";
-        $directory = app_path("Beacon/Rules/{$categoryNamespace}");
+        $namespace = "App\\Spotlight\\Rules\\{$categoryNamespace}";
+        $directory = app_path("Spotlight/Rules/{$categoryNamespace}");
         $filePath = "{$directory}/{$className}.php";
 
         // Create directory if it doesn't exist
@@ -85,11 +85,11 @@ class MakeRuleCommand extends Command
         $this->newLine();
         $this->comment('Next steps:');
         $this->line('1. Edit the rule to implement your scanning logic');
-        $this->line('2. Register it in config/beacon.php:');
+        $this->line('2. Register it in config/spotlight.php:');
         $this->line("   'custom_rules' => [");
         $this->line("       \\{$namespace}\\{$className}::class,");
         $this->line('   ],');
-        $this->line('3. Run: php artisan beacon:scan');
+        $this->line('3. Run: php artisan spotlight:scan');
 
         return self::SUCCESS;
     }
@@ -101,7 +101,7 @@ class MakeRuleCommand extends Command
 
 namespace {{namespace}};
 
-use AtoAugustine\Beacon\Rules\AbstractRule;
+use Otatechie\Spotlight\Rules\AbstractRule;
 
 class {{className}} extends AbstractRule
 {

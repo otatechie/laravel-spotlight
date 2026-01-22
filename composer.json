@@ -1,12 +1,12 @@
 {
-    "name": "otatechie/laravel-beacon",
+    "name": "otatechie/laravel-spotlight",
     "description": "A lighthouse-style diagnostics tool that scans Laravel applications for performance, security, and architecture issues.",
     "keywords": [
         "otatechie",
         "laravel",
-        "laravel-beacon"
+        "laravel-spotlight"
     ],
-    "homepage": "https://github.com/otatechie/laravel-beacon",
+    "homepage": "https://github.com/otatechie/laravel-spotlight",
     "license": "MIT",
     "authors": [
         {
@@ -35,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "AtoAugustine\\Beacon\\": "src/"
+            "Otatechie\\Spotlight\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AtoAugustine\\Beacon\\Tests\\": "tests/",
+            "Otatechie\\Spotlight\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -62,10 +62,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AtoAugustine\\Beacon\\BeaconServiceProvider"
+                "Otatechie\\Spotlight\\SpotlightServiceProvider"
             ],
             "aliases": {
-                "Beacon": "AtoAugustine\\Beacon\\Facades\\Beacon"
+                "Spotlight": "Otatechie\\Spotlight\\Facades\\Spotlight"
             }
         }
     },

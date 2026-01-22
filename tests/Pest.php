@@ -1,5 +1,5 @@
 <?php
 
-use AtoAugustine\Beacon\Tests\TestCase;
+use Otatechie\Spotlight\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

@@ -1,6 +1,6 @@
 <?php
 
-namespace AtoAugustine\Beacon;
+namespace Otatechie\Spotlight;
 
 class Severity
 {

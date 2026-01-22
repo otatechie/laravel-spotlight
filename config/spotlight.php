@@ -62,7 +62,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Register your own custom rules here. Rules must implement
-    | AtoAugustine\Beacon\Rules\RuleInterface
+    | Otatechie\Beacon\Rules\RuleInterface
     |
     */
     'custom_rules' => [

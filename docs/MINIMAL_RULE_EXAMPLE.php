@@ -9,7 +9,7 @@
 
 namespace App\Beacon\Rules\Performance;
 
-use AtoAugustine\Beacon\Rules\AbstractRule;
+use Otatechie\Beacon\Rules\AbstractRule;
 
 class MinimalRule extends AbstractRule
 {

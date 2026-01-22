@@ -1,20 +1,20 @@
-# Laravel Beacon
+# Laravel Spotlight
 
 A lighthouse-style diagnostics tool that scans Laravel applications for performance, security, and architecture issues. Built with a modular rule system that makes it easy to extend and customize.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/otatechie/laravel-beacon.svg?style=flat-square)](https://packagist.org/packages/otatechie/laravel-beacon)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/otatechie/laravel-beacon/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/otatechie/laravel-beacon/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/otatechie/laravel-beacon/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/otatechie/laravel-beacon/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/otatechie/laravel-beacon.svg?style=flat-square)](https://packagist.org/packages/otatechie/laravel-beacon)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/otatechie/laravel-spotlight.svg?style=flat-square)](https://packagist.org/packages/otatechie/laravel-spotlight)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/otatechie/laravel-spotlight/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/otatechie/laravel-spotlight/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/otatechie/laravel-spotlight/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/otatechie/laravel-spotlight/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/otatechie/laravel-spotlight.svg?style=flat-square)](https://packagist.org/packages/otatechie/laravel-spotlight)
 
-## What is Beacon?
+## What is Spotlight?
 
-**Beacon is NOT:**
-- ❌ **Code formatter** - Beacon doesn't format or fix your code style
-- ❌ **Linter** - Beacon doesn't enforce coding standards or syntax rules
-- ❌ **Debugger** - Beacon doesn't debug runtime errors or exceptions
+**Spotlight is NOT:**
+- ❌ **Code formatter** - Spotlight doesn't format or fix your code style
+- ❌ **Linter** - Spotlight doesn't enforce coding standards or syntax rules
+- ❌ **Debugger** - Spotlight doesn't debug runtime errors or exceptions
 
-**Beacon IS:**
+**Spotlight IS:**
 - ✅ **Diagnostic Scanner** - Identifies potential issues before they become problems
 - ✅ **Best Practices Advisor** - Suggests improvements based on Laravel best practices
 - ✅ **Performance Analyzer** - Detects performance bottlenecks and optimization opportunities
@@ -22,7 +22,7 @@ A lighthouse-style diagnostics tool that scans Laravel applications for performa
 - ✅ **Architecture Mentor** - Provides gentle guidance on code organization and structure
 - ✅ **Guidance Tool** - Offers suggestions, not enforcement (you're in control)
 
-Laravel Beacon helps you identify and fix issues in your Laravel application before they become problems. It scans your application for:
+Laravel Spotlight helps you identify and fix issues in your Laravel application before they become problems. It scans your application for:
 
 - **Performance Issues**: Missing caches, inefficient queue drivers, N+1 queries
 - **Security Vulnerabilities**: Debug mode in production, insecure configurations
@@ -30,55 +30,27 @@ Laravel Beacon helps you identify and fix issues in your Laravel application bef
 
 ## Philosophy
 
-**Beacon provides guidance, not enforcement. No shaming, no judgment.**
+**Spotlight provides guidance, not enforcement. No shaming, no judgment.**
 
-Laravel Beacon is designed as a **friendly mentor**, not an angry linter. We believe in helping developers improve their code through gentle suggestions, not through shame or rigid enforcement.
-
-### Core Principles
+Laravel Spotlight is designed as a **friendly mentor**, not an angry linter. We believe in helping developers improve their code through gentle suggestions, not through shame or rigid enforcement.
 
 - **No Shaming** - We use "could improve" and "consider" instead of "MUST fix" or "WRONG"
-- **No Judgment** - We inform about potential improvements without making you feel bad
 - **User Control** - Every rule can be disabled if it doesn't fit your project
-- **Objective vs Advisory** - Security and performance issues are flagged firmly but respectfully; architecture suggestions are gentle recommendations
-- **Fast & Lightweight** - Beacon runs quickly (< 1 second) using lightweight checks, config inspection, and Laravel APIs
+- **Objective vs Advisory** - Security/performance issues are flagged firmly; architecture suggestions are gentle
+- **Fast & Lightweight** - Executes in < 1 second using lightweight checks
 
-### Language Examples
-
-**Beacon says:**
-- ✅ "Config cache could improve performance"
-- ✅ "Consider extracting business logic to service classes"
-- ✅ "This works for development, but may need review for production"
-
-**Beacon never says:**
-- ❌ "Config cache is missing - FIX IT!"
-- ❌ "Your controller is too large - this is wrong!"
-- ❌ "You must use Form Requests!"
-
-Our goal is to help you build better Laravel applications through helpful guidance, not rigid enforcement or shame.
+See [Why Spotlight?](docs/WHY_SPOTLIGHT.md) for a detailed comparison with other tools.
 
 ## Features
 
-- 🔍 **Comprehensive Scanning**: Automatically scans your Laravel application for common issues
-- 🧩 **Modular Rule System**: Easy to extend with custom rules (just 2-3 properties needed!)
-- ⚙️ **Full User Control**: Enable/disable any rule that doesn't fit your project
-- 🎯 **Objective vs Advisory**: Distinguishes firm recommendations from gentle suggestions
-- ⚡ **Lightning Fast**: Executes in < 1 second using lightweight checks
-- 🛡️ **Error Handling**: Robust error handling prevents single rule failures from crashing scans
-- 📊 **Multiple Output Formats**: Table and JSON output formats
-- 🎨 **Clean API**: Convention-based auto-detection eliminates boilerplate
-- 🛠️ **Developer Tools**: Rule generator, rule listing, CI/CD exit codes
-
-## What Makes Beacon Different?
-
-Unlike other diagnostic tools that are aggressive and dogmatic, Beacon is designed as a **friendly mentor**:
-
-- ✅ **Informs, doesn't judge** - Suggests improvements without shaming
-- ✅ **User control** - Every rule can be disabled if it doesn't apply
-- ✅ **Fast execution** - Runs in < 1 second, not 10-30 seconds
-- ✅ **Easy to extend** - Create custom rules with minimal code
-- ✅ **Non-judgmental** - Uses "consider" and "could improve" instead of "MUST fix"
-
-See [Why Beacon?](docs/WHY_BEACON.md) for a detailed comparison with other tools.
+- 🔍 **Comprehensive Scanning** - 25+ built-in rules covering performance, security, and architecture
+- 🧩 **Modular Rule System** - Easy to extend with custom rules (auto-detection eliminates boilerplate)
+- ⚙️ **Full User Control** - Enable/disable any rule that doesn't fit your project
+- 🎯 **Severity Scoring** - 4-level severity system with health score calculation
+- ⚡ **Lightning Fast** - Executes in < 1 second
+- 🛡️ **Error Handling** - Robust error handling prevents single rule failures from crashing scans
+- 📊 **Multiple Output Formats** - Table and JSON output formats
+- 🛠️ **Developer Tools** - Rule generator, rule listing, CI/CD exit codes
 
 
 ## Installation
@@ -86,13 +58,13 @@ See [Why Beacon?](docs/WHY_BEACON.md) for a detailed comparison with other tools
 You can install the package via composer:
 
 ```bash
-composer require otatechie/laravel-beacon
+composer require otatechie/laravel-spotlight
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-beacon-config"
+php artisan vendor:publish --tag="spotlight-config"
 ```
 
 The config file includes options for:
@@ -112,7 +84,7 @@ See the [configuration documentation](docs/EXAMPLES.md#configuration-examples) f
 Run a full scan of your application:
 
 ```bash
-php artisan beacon:scan
+php artisan spotlight:scan
 ```
 
 ### Scan Specific Categories
@@ -120,19 +92,19 @@ php artisan beacon:scan
 Scan only performance issues:
 
 ```bash
-php artisan beacon:scan --category=performance
+php artisan spotlight:scan --category=performance
 ```
 
 Scan multiple categories:
 
 ```bash
-php artisan beacon:scan --category=performance --category=security
+php artisan spotlight:scan --category=performance --category=security
 ```
 
 ### Get JSON Output
 
 ```bash
-php artisan beacon:scan --format=json
+php artisan spotlight:scan --format=json
 ```
 
 ### Filter by Severity
@@ -140,12 +112,12 @@ php artisan beacon:scan --format=json
 Only show critical issues:
 
 ```bash
-php artisan beacon:scan --severity=critical
+php artisan spotlight:scan --severity=critical
 ```
 
 ### Exit Codes for CI/CD
 
-Beacon uses a sophisticated exit code system for CI/CD integration:
+Spotlight uses a sophisticated exit code system for CI/CD integration:
 
 **Exit Code Mapping:**
 - `0` - No issues found (clean scan)
@@ -157,23 +129,23 @@ Beacon uses a sophisticated exit code system for CI/CD integration:
 
 ```bash
 # Default: Auto-detect exit code based on severity
-php artisan beacon:scan
+php artisan spotlight:scan
 
 # Fail only on critical issues
-php artisan beacon:scan --fail-on=critical
+php artisan spotlight:scan --fail-on=critical
 
 # Fail on high or critical issues
-php artisan beacon:scan --fail-on=high
+php artisan spotlight:scan --fail-on=high
 
 # Fail on any issues (including low)
-php artisan beacon:scan --fail-on=low
+php artisan spotlight:scan --fail-on=low
 ```
 
 **GitHub Actions Example:**
 
 ```yaml
-- name: Run Beacon Scan
-  run: php artisan beacon:scan || exit 1
+- name: Run Spotlight Scan
+  run: php artisan spotlight:scan || exit 1
 ```
 
 ### List Available Rules
@@ -181,13 +153,13 @@ php artisan beacon:scan --fail-on=low
 See all available rules:
 
 ```bash
-php artisan beacon:rules
+php artisan spotlight:rules
 ```
 
 Get details about a specific rule:
 
 ```bash
-php artisan beacon:rules --rule=performance.config-cache
+php artisan spotlight:rules --rule=performance.config-cache
 ```
 
 ### Create Custom Rules
@@ -195,7 +167,7 @@ php artisan beacon:rules --rule=performance.config-cache
 Generate a new rule class:
 
 ```bash
-php artisan beacon:make-rule MyCustomRule --category=performance --type=objective
+php artisan spotlight:make-rule MyCustomRule --category=performance --type=objective
 ```
 
 This creates a rule class with proper structure and auto-registers it.
@@ -203,10 +175,10 @@ This creates a rule class with proper structure and auto-registers it.
 ### Programmatic Usage
 
 ```php
-use AtoAugustine\Beacon\Beacon;
+use Otatechie\Spotlight\Spotlight;
 
-$beacon = app(Beacon::class);
-$results = $beacon->scan(['performance', 'security']);
+$spotlight = app(Spotlight::class);
+$results = $spotlight->scan(['performance', 'security']);
 
 // Access results
 $summary = $results['summary'];
@@ -215,21 +187,21 @@ $categories = $results['categories'];
 
 ## Rule Types & Severity
 
-Beacon uses a two-dimensional classification system:
+Spotlight uses a two-dimensional classification system:
 
 ### Rule Types
 
 - **Objective Rules** (`type: 'objective'`) - Firm recommendations based on hard facts
   - Examples: Debug enabled, config not cached, insecure cookies
-  - Beacon can be firm with these
+  - Spotlight can be firm with these
   
 - **Advisory Rules** (`type: 'advisory'`) - Gentle suggestions based on best practices
   - Examples: Fat controllers, route closures, folder structure
-  - Beacon should be gentle with these
+  - Spotlight should be gentle with these
 
 ### Severity Levels
 
-Beacon uses 4 severity levels with numeric weights for scoring:
+Spotlight uses 4 severity levels with numeric weights for scoring:
 
 | Level | Weight | Purpose |
 |-------|--------|---------|
@@ -238,9 +210,9 @@ Beacon uses 4 severity levels with numeric weights for scoring:
 | `medium` | 40 | Degraded behavior / suboptimal config |
 | `low` | 10 | Minor improvement / suggestion |
 
-**Health Score:** Beacon calculates a health score (0-100%) based on severity weights, giving you a quick overview of your application's status.
+**Health Score:** Spotlight calculates a health score (0-100%) based on severity weights, giving you a quick overview of your application's status.
 
-All rules can be disabled in `config/beacon.php` if they don't apply to your project.
+All rules can be disabled in `config/spotlight.php` if they don't apply to your project.
 
 ## Built-in Rules
 
@@ -265,6 +237,10 @@ All rules can be disabled in `config/beacon.php` if they don't apply to your pro
 
 - **Route Closure Usage**: Detects route closures preventing caching
 - **Large Controller Detection**: Identifies controllers exceeding 300 lines
+- **Missing API Resources**: Detects API routes without API resources
+- **Direct DB Queries**: Identifies direct database queries in controllers
+- **Missing Form Requests**: Detects controllers using inline validation instead of Form Requests
+- **Missing Service Layer**: Identifies controllers with business logic that should be in services
 - **Direct ENV Usage**: Finds direct `env()` calls that should use `config()`
 - **Queries in Blade**: Detects database queries in Blade templates
 - **Mass Assignment Protection**: Checks for missing `$fillable` or `$guarded`
@@ -273,31 +249,21 @@ All rules can be disabled in `config/beacon.php` if they don't apply to your pro
 - **JS/CSS in Blade**: Finds inline JavaScript and CSS in templates
 - **Magic Strings**: Identifies hardcoded strings that should be constants
 
-### Rule Sources
-
-Beacon's rules are based on authoritative sources and community best practices:
-
-- **[Laravel Official Documentation](https://laravel.com/docs)** - Official Laravel best practices and recommendations
-- **[Laravel Best Practices Guide](https://github.com/alexeymezenin/laravel-best-practices)** - Community-maintained best practices (12.2k+ stars)
-- **Laravel Community Standards** - Widely accepted patterns from the Laravel community
-- **Security Best Practices** - Common security recommendations for Laravel applications
-
-For more details on the sources and rationale behind each rule, see [docs/LARAVEL_BEST_PRACTICES.md](docs/LARAVEL_BEST_PRACTICES.md).
 
 ## Creating Custom Rules
 
-Laravel Beacon makes it easy to create your own custom rules. See the [Creating Rules Guide](docs/CREATING_RULES.md) for detailed instructions.
+Laravel Spotlight makes it easy to create your own custom rules. See the [Creating Rules Guide](docs/CREATING_RULES.md) for detailed instructions.
 
 ### Quick Example
 
-Using Beacon's clean auto-detection approach:
+Using Spotlight's clean auto-detection approach:
 
 ```php
 <?php
 
-namespace App\Beacon\Rules\Performance; // Category auto-detected from namespace!
+namespace App\Spotlight\Rules\Performance; // Category auto-detected from namespace!
 
-use AtoAugustine\Beacon\Rules\AbstractRule;
+use Otatechie\Spotlight\Rules\AbstractRule;
 
 class MyCustomRule extends AbstractRule
 {
@@ -323,12 +289,12 @@ class MyCustomRule extends AbstractRule
 }
 ```
 
-Register it in `config/beacon.php`:
+Register it in `config/spotlight.php`:
 
 ```php
 return [
     'custom_rules' => [
-        \App\Beacon\Rules\MyCustomRule::class,
+        \App\Spotlight\Rules\MyCustomRule::class,
     ],
 ];
 ```
@@ -338,7 +304,7 @@ return [
 Publish the config file:
 
 ```bash
-php artisan vendor:publish --tag="laravel-beacon-config"
+php artisan vendor:publish --tag="spotlight-config"
 ```
 
 Key configuration options:
@@ -351,12 +317,6 @@ Key configuration options:
 
 See [Examples & Configuration](docs/EXAMPLES.md) for more details.
 
-## Testing
-
-```bash
-composer test
-```
-
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
@@ -365,6 +325,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 - [Creating Custom Rules](docs/CREATING_RULES.md) - Guide to creating your own rules
 - [Examples & Configuration](docs/EXAMPLES.md) - Usage examples and configuration options
+- [Laravel Best Practices](docs/LARAVEL_BEST_PRACTICES.md) - Sources and rationale behind rules
 
 ## Contributing
 
