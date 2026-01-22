@@ -75,3 +75,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Laravel Trademark Disclaimer
+
+Laravel is a trademark of Taylor Otwell. This package is not officially associated with Laravel or Taylor Otwell. The "laravel-" prefix in the package name is used to indicate compatibility with the Laravel framework and follows community naming conventions.

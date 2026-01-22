@@ -4,8 +4,11 @@ composer.lock
 
 # Frontend Assets
 /node_modules
+package-lock.json
+yarn.lock
 
 # Logs
+*.log
 npm-debug.log
 yarn-error.log
 
@@ -13,6 +16,7 @@ yarn-error.log
 .phpunit.cache
 .phpunit.result.cache
 /build
+/.phpunit.cache
 
 # IDE Helper
 _ide_helper.php
@@ -23,10 +27,29 @@ _ide_helper_models.php
 /.idea
 /.fleet
 /.vscode
+*.swp
+*.swo
+*~
+.DS_Store
 
-# Misc
-phpunit.xml
-phpstan.neon
+# Laravel Package Development
 testbench.yaml
-/docs
+workbench/
+.phpunit.cache/
+
+# Testing & Coverage
 /coverage
+.phpunit.result.cache
+/clover.xml
+
+# Documentation
+/docs
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# Environment
+.env
+.env.backup
+.env.production
