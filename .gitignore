@@ -1,0 +1,55 @@
+# Composer Related
+composer.lock
+/vendor
+
+# Frontend Assets
+/node_modules
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+npm-debug.log
+yarn-error.log
+
+# Caches
+.phpunit.cache
+.phpunit.result.cache
+/build
+/.phpunit.cache
+
+# IDE Helper
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
+
+# Editors
+/.idea
+/.fleet
+/.vscode
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Laravel Package Development
+testbench.yaml
+workbench/
+.phpunit.cache/
+
+# Testing & Coverage
+/coverage
+.phpunit.result.cache
+/clover.xml
+
+# Documentation
+# /docs - Keep docs in repo for users
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# Environment
+.env
+.env.backup
+.env.production

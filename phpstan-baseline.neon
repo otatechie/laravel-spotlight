@@ -1,0 +1,6 @@
+parameters:
+    ignoreErrors:
+        -
+            message: "#^Called 'env' outside of the config directory#"
+            path: config/beacon.php
+            count: 1

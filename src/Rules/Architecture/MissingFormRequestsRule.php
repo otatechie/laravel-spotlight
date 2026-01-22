@@ -1,0 +1,62 @@
+<?php
+
+namespace Otatechie\Spotlight\Rules\Architecture;
+
+use Otatechie\Spotlight\Rules\AbstractRule;
+use Illuminate\Support\Facades\File;
+
+class MissingFormRequestsRule extends AbstractRule
+{
+    protected ?string $name = 'Form Request Usage Check';
+
+    protected string $description = 'Identifies controllers that may benefit from using Form Request classes for validation';
+
+    public function scan(): array
+    {
+        $controllersPath = app_path('Http/Controllers');
+        $formRequestsPath = app_path('Http/Requests');
+
+        if (! File::exists($controllersPath)) {
+            return $this->pass('Controllers directory not found');
+        }
+
+        $controllers = File::allFiles($controllersPath);
+        $controllersWithValidation = [];
+        $hasFormRequests = File::exists($formRequestsPath) && count(File::files($formRequestsPath)) > 0;
+
+        foreach ($controllers as $controller) {
+            $content = File::get($controller->getPathname());
+
+            // Check for validation patterns (Request::validate, $request->validate, Validator::make)
+            $hasValidation = preg_match('/(\$request->validate|Request::validate|Validator::make)/i', $content);
+
+            if ($hasValidation) {
+                $controllersWithValidation[] = [
+                    'file' => $controller->getRelativePathname(),
+                ];
+            }
+        }
+
+        if (! empty($controllersWithValidation) && ! $hasFormRequests) {
+            return $this->suggest(
+                'Found '.count($controllersWithValidation).' controller(s) with inline validation',
+                [
+                    'controllers' => $controllersWithValidation,
+                    'recommendation' => 'Consider using Form Request classes (php artisan make:request) to separate validation logic from controllers',
+                ]
+            );
+        }
+
+        if (! empty($controllersWithValidation) && $hasFormRequests) {
+            return $this->suggest(
+                'Some controllers use inline validation - Form Requests are available and recommended',
+                [
+                    'controllers' => $controllersWithValidation,
+                    'recommendation' => 'Move validation logic to Form Request classes for better organization and reusability',
+                ]
+            );
+        }
+
+        return $this->pass('Validation appears to be properly organized');
+    }
+}
