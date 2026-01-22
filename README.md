@@ -99,7 +99,7 @@ The config file includes options for:
 
 - Enabling/disabling specific rules
 - Registering custom rules
-- Setting minimum severity levels
+- Setting severity threshold
 - Configuring error handling
 - Enabling debug mode
 
@@ -290,39 +290,24 @@ Laravel Beacon makes it easy to create your own custom rules. See the [Creating 
 
 ### Quick Example
 
+Using Beacon's clean auto-detection approach:
+
 ```php
 <?php
 
-namespace App\Beacon\Rules;
+namespace App\Beacon\Rules\Performance; // Category auto-detected from namespace!
 
 use AtoAugustine\Beacon\Rules\AbstractRule;
 
 class MyCustomRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'custom.my-rule';
-    }
-
-    public function getCategory(): string
-    {
-        return 'custom';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'medium';
-    }
-
-    public function getName(): string
-    {
-        return 'My Custom Rule';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Checks for a specific issue';
-    }
+    // Only define what's different - everything else is auto-detected!
+    protected string $severity = 'medium';
+    protected string $description = 'Checks for a specific issue';
+    
+    // id: auto-generated as 'performance.my-custom'
+    // category: auto-detected as 'performance' from namespace
+    // name: auto-generated as 'My Custom' from class name
 
     public function scan(): array
     {
@@ -360,7 +345,7 @@ Key configuration options:
 
 - `enabled_rules` - Enable/disable specific rules
 - `custom_rules` - Register your own custom rules
-- `minimum_severity` - Filter rules by severity level
+- `severity_threshold` - Filter rules by severity level
 - `debug` - Enable debug logging
 - `error_handling` - Control error handling behavior
 
