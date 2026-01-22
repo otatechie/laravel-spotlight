@@ -2,9 +2,9 @@
 
 namespace Otatechie\Spotlight\Commands;
 
-use Otatechie\Spotlight\Spotlight;
-use Otatechie\Spotlight\Severity;
 use Illuminate\Console\Command;
+use Otatechie\Spotlight\Severity;
+use Otatechie\Spotlight\Spotlight;
 
 class SpotlightCommand extends Command
 {

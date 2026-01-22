@@ -2,8 +2,8 @@
 
 namespace Otatechie\Spotlight\Rules\Performance;
 
-use Otatechie\Spotlight\Rules\AbstractRule;
 use Illuminate\Support\Facades\File;
+use Otatechie\Spotlight\Rules\AbstractRule;
 
 class MissingChunkingRule extends AbstractRule
 {

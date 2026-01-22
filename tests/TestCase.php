@@ -2,8 +2,8 @@
 
 namespace Otatechie\Spotlight\Tests;
 
-use Otatechie\Spotlight\SpotlightServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Otatechie\Spotlight\SpotlightServiceProvider;
 
 class TestCase extends Orchestra
 {

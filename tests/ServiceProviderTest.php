@@ -1,7 +1,7 @@
 <?php
 
-use Otatechie\Spotlight\SpotlightServiceProvider;
 use Illuminate\Support\Facades\Artisan;
+use Otatechie\Spotlight\SpotlightServiceProvider;
 
 it('registers the service provider', function () {
     $providers = app()->getLoadedProviders();

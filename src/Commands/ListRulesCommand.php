@@ -2,8 +2,8 @@
 
 namespace Otatechie\Spotlight\Commands;
 
-use Otatechie\Spotlight\Rules\RuleRegistry;
 use Illuminate\Console\Command;
+use Otatechie\Spotlight\Rules\RuleRegistry;
 
 class ListRulesCommand extends Command
 {

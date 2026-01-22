@@ -2,8 +2,8 @@
 
 namespace Otatechie\Spotlight\Rules\Architecture;
 
-use Otatechie\Spotlight\Rules\AbstractRule;
 use Illuminate\Support\Facades\File;
+use Otatechie\Spotlight\Rules\AbstractRule;
 
 class LargeControllerRule extends AbstractRule
 {

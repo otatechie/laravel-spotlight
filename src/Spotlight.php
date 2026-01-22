@@ -2,9 +2,9 @@
 
 namespace Otatechie\Spotlight;
 
+use Illuminate\Support\Facades\Log;
 use Otatechie\Spotlight\Rules\RuleInterface;
 use Otatechie\Spotlight\Rules\RuleRegistry;
-use Illuminate\Support\Facades\Log;
 
 class Spotlight
 {
@@ -147,7 +147,7 @@ class Spotlight
                 throw $e;
             }
 
-                Log::warning("Spotlight rule {$rule->getId()} encountered an issue: {$e->getMessage()}", [
+            Log::warning("Spotlight rule {$rule->getId()} encountered an issue: {$e->getMessage()}", [
                 'exception' => get_class($e),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),

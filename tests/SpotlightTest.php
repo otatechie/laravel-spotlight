@@ -1,7 +1,7 @@
 <?php
 
-use Otatechie\Spotlight\Spotlight;
 use Otatechie\Spotlight\Rules\RuleRegistry;
+use Otatechie\Spotlight\Spotlight;
 
 it('can scan all categories by default', function () {
     $registry = app(RuleRegistry::class);

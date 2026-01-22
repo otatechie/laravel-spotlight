@@ -11,8 +11,8 @@
 
 namespace App\Beacon\Rules;
 
-use Otatechie\Beacon\Rules\AbstractRule;
 use Illuminate\Support\Facades\File;
+use Otatechie\Beacon\Rules\AbstractRule;
 
 class ExampleCustomRule extends AbstractRule
 {
