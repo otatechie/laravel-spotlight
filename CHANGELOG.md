@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-beacon` will be documented in this file.
 
+## v1.0.3 - 2026-01-22
+
+**Full Changelog**: https://github.com/otatechie/laravel-beacon/compare/v1.0.2...v1.0.3
+
 ## v1.1.0 - 2026-01-22
 
 **Full Changelog**: https://github.com/otatechie/laravel-beacon/compare/v1.0.2...v1.1.0
