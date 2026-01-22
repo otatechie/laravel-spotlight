@@ -196,25 +196,25 @@ class BeaconCommand extends Command
     protected function displayFileLocations(array $metadata): void
     {
         $locations = $this->extractFileLocations($metadata);
-        
+
         if (empty($locations)) {
             return;
         }
 
         // Limit to first 5 locations to avoid overwhelming output
         $displayLocations = array_slice($locations, 0, 5);
-        
+
         foreach ($displayLocations as $location) {
             $file = $this->formatFilePath($location['file'] ?? '');
             $line = $location['line'] ?? null;
-            
+
             if ($line) {
                 $this->line("  <fg=gray>at {$file}:{$line}</>");
             } else {
                 $this->line("  <fg=gray>at {$file}</>");
             }
         }
-        
+
         // Show count if there are more locations
         if (count($locations) > 5) {
             $remaining = count($locations) - 5;
@@ -227,28 +227,28 @@ class BeaconCommand extends Command
         // If file path doesn't start with app/, resources/, etc., try to infer
         // Rules typically return paths like "Http/Controllers/UserController.php"
         // or "Models/User.php" - we want to show them as "app/Http/Controllers/..."
-        
-        if (str_starts_with($file, 'app/') || 
-            str_starts_with($file, 'resources/') || 
+
+        if (str_starts_with($file, 'app/') ||
+            str_starts_with($file, 'resources/') ||
             str_starts_with($file, 'config/') ||
             str_starts_with($file, 'routes/') ||
             str_starts_with($file, 'database/')) {
             return $file;
         }
-        
+
         // If it looks like a relative path from app directory
-        if (str_contains($file, 'Http/Controllers') || 
+        if (str_contains($file, 'Http/Controllers') ||
             str_contains($file, 'Models/') ||
             str_contains($file, 'Services/') ||
             str_contains($file, 'Repositories/')) {
             return "app/{$file}";
         }
-        
+
         // If it looks like a view path
         if (str_contains($file, 'views/') || str_contains($file, '.blade.php')) {
             return "resources/{$file}";
         }
-        
+
         // Return as-is if we can't determine
         return $file;
     }
