@@ -391,7 +391,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Ato Augustine](https://github.com/otatechie)
+- [otatechie](https://github.com/otatechie)
 - [All Contributors](../../contributors)
 
 ## License
