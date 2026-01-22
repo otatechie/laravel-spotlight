@@ -94,19 +94,19 @@ class BeaconCommand extends Command
 
         $this->info('Summary');
         $this->line('────────────────────');
-        
+
         // Build colored table rows
         $rows = [];
         $critical = $summary['critical'] ?? 0;
         $high = $summary['high'] ?? 0;
         $medium = $summary['medium'] ?? 0;
         $low = $summary['low'] ?? 0;
-        
+
         $rows[] = [$this->colorizeSeverity('Critical', 'critical'), $critical];
         $rows[] = [$this->colorizeSeverity('High', 'high'), $high];
         $rows[] = [$this->colorizeSeverity('Medium', 'medium'), $medium];
         $rows[] = [$this->colorizeSeverity('Low', 'low'), $low];
-        
+
         $this->table(['Severity', 'Count'], $rows);
 
         $healthScore = $summary['health_score'] ?? 100;
@@ -171,7 +171,7 @@ class BeaconCommand extends Command
         // Get severity label and emoji
         $severityLabel = strtoupper($severity);
         $emoji = Severity::emoji($severity);
-        
+
         // Colorize the severity label
         $coloredSeverity = $this->colorizeSeverity($severityLabel, $severity);
 
