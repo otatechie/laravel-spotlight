@@ -2,9 +2,9 @@
 
 namespace AtoAugustine\Beacon;
 
+use AtoAugustine\Beacon\Commands\BeaconCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use AtoAugustine\Beacon\Commands\BeaconCommand;
 
 class BeaconServiceProvider extends PackageServiceProvider
 {

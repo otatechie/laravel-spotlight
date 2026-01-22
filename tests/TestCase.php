@@ -2,9 +2,9 @@
 
 namespace AtoAugustine\Beacon\Tests;
 
+use AtoAugustine\Beacon\BeaconServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use AtoAugustine\Beacon\BeaconServiceProvider;
 
 class TestCase extends Orchestra
 {
