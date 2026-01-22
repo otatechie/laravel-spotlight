@@ -20,6 +20,13 @@ interface RuleInterface
     public function getSeverity(): string;
 
     /**
+     * Get the rule type (objective or advisory)
+     * - objective: Firm recommendations for security/performance issues
+     * - advisory: Gentle suggestions for architecture/style improvements
+     */
+    public function getType(): string;
+
+    /**
      * Get the rule name/title
      */
     public function getName(): string;

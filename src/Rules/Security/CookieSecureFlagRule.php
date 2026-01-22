@@ -6,30 +6,9 @@ use AtoAugustine\Beacon\Rules\AbstractRule;
 
 class CookieSecureFlagRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'security.cookie-secure-flag';
-    }
+    protected ?string $name = 'Cookie Secure Flag Check';
 
-    public function getCategory(): string
-    {
-        return 'security';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'warning';
-    }
-
-    public function getName(): string
-    {
-        return 'Cookie Secure Flag Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Checks if secure cookie flag is enabled for production';
-    }
+    protected string $description = 'Checks if secure cookie flag is enabled for production';
 
     public function scan(): array
     {

@@ -7,30 +7,9 @@ use Illuminate\Support\Facades\File;
 
 class MissingApiResourcesRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'architecture.missing-api-resources';
-    }
+    protected ?string $name = 'API Resources Check';
 
-    public function getCategory(): string
-    {
-        return 'architecture';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'API Resources Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Identifies API routes that may benefit from using API resources';
-    }
+    protected string $description = 'Identifies API routes that may benefit from using API resources';
 
     public function scan(): array
     {

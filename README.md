@@ -7,20 +7,78 @@ A lighthouse-style diagnostics tool that scans Laravel applications for performa
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/otatechie/laravel-beacon/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/otatechie/laravel-beacon/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/otatechie/laravel-beacon.svg?style=flat-square)](https://packagist.org/packages/otatechie/laravel-beacon)
 
+## What is Beacon?
+
+**Beacon is NOT:**
+- ❌ **Code formatter** - Beacon doesn't format or fix your code style
+- ❌ **Linter** - Beacon doesn't enforce coding standards or syntax rules
+- ❌ **Debugger** - Beacon doesn't debug runtime errors or exceptions
+
+**Beacon IS:**
+- ✅ **Diagnostic Scanner** - Identifies potential issues before they become problems
+- ✅ **Best Practices Advisor** - Suggests improvements based on Laravel best practices
+- ✅ **Performance Analyzer** - Detects performance bottlenecks and optimization opportunities
+- ✅ **Security Auditor** - Flags security vulnerabilities and misconfigurations
+- ✅ **Architecture Mentor** - Provides gentle guidance on code organization and structure
+- ✅ **Guidance Tool** - Offers suggestions, not enforcement (you're in control)
+
 Laravel Beacon helps you identify and fix issues in your Laravel application before they become problems. It scans your application for:
 
 - **Performance Issues**: Missing caches, inefficient queue drivers, N+1 queries
 - **Security Vulnerabilities**: Debug mode in production, insecure configurations
 - **Architecture Problems**: Fat controllers, route closures, code organization
 
+## Philosophy
+
+**Beacon provides guidance, not enforcement. No shaming, no judgment.**
+
+Laravel Beacon is designed as a **friendly mentor**, not an angry linter. We believe in helping developers improve their code through gentle suggestions, not through shame or rigid enforcement.
+
+### Core Principles
+
+- **No Shaming** - We use "could improve" and "consider" instead of "MUST fix" or "WRONG"
+- **No Judgment** - We inform about potential improvements without making you feel bad
+- **User Control** - Every rule can be disabled if it doesn't fit your project
+- **Objective vs Advisory** - Security and performance issues are flagged firmly but respectfully; architecture suggestions are gentle recommendations
+- **Fast & Lightweight** - Beacon runs quickly (< 1 second) using lightweight checks, config inspection, and Laravel APIs
+
+### Language Examples
+
+**Beacon says:**
+- ✅ "Config cache could improve performance"
+- ✅ "Consider extracting business logic to service classes"
+- ✅ "This works for development, but may need review for production"
+
+**Beacon never says:**
+- ❌ "Config cache is missing - FIX IT!"
+- ❌ "Your controller is too large - this is wrong!"
+- ❌ "You must use Form Requests!"
+
+Our goal is to help you build better Laravel applications through helpful guidance, not rigid enforcement or shame.
+
 ## Features
 
 - 🔍 **Comprehensive Scanning**: Automatically scans your Laravel application for common issues
-- 🧩 **Modular Rule System**: Easy to extend with custom rules
-- ⚙️ **Configurable**: Enable/disable rules, set severity levels, add custom rules
+- 🧩 **Modular Rule System**: Easy to extend with custom rules (just 2-3 properties needed!)
+- ⚙️ **Full User Control**: Enable/disable any rule that doesn't fit your project
+- 🎯 **Objective vs Advisory**: Distinguishes firm recommendations from gentle suggestions
+- ⚡ **Lightning Fast**: Executes in < 1 second using lightweight checks
 - 🛡️ **Error Handling**: Robust error handling prevents single rule failures from crashing scans
 - 📊 **Multiple Output Formats**: Table and JSON output formats
-- 🎯 **Category Filtering**: Scan specific categories or all at once
+- 🎨 **Clean API**: Convention-based auto-detection eliminates boilerplate
+- 🛠️ **Developer Tools**: Rule generator, rule listing, CI/CD exit codes
+
+## What Makes Beacon Different?
+
+Unlike other diagnostic tools that are aggressive and dogmatic, Beacon is designed as a **friendly mentor**:
+
+- ✅ **Informs, doesn't judge** - Suggests improvements without shaming
+- ✅ **User control** - Every rule can be disabled if it doesn't apply
+- ✅ **Fast execution** - Runs in < 1 second, not 10-30 seconds
+- ✅ **Easy to extend** - Create custom rules with minimal code
+- ✅ **Non-judgmental** - Uses "consider" and "could improve" instead of "MUST fix"
+
+See [Why Beacon?](docs/WHY_BEACON.md) for a detailed comparison with other tools.
 
 
 ## Installation
@@ -85,6 +143,63 @@ Only show critical issues:
 php artisan beacon:scan --severity=critical
 ```
 
+### Exit Codes for CI/CD
+
+Beacon uses a sophisticated exit code system for CI/CD integration:
+
+**Exit Code Mapping:**
+- `0` - No issues found (clean scan)
+- `1` - Only low severity issues found
+- `2` - Medium or high severity issues found
+- `3` - Critical issues found
+
+**Usage Examples:**
+
+```bash
+# Default: Auto-detect exit code based on severity
+php artisan beacon:scan
+
+# Fail only on critical issues
+php artisan beacon:scan --fail-on=critical
+
+# Fail on high or critical issues
+php artisan beacon:scan --fail-on=high
+
+# Fail on any issues (including low)
+php artisan beacon:scan --fail-on=low
+```
+
+**GitHub Actions Example:**
+
+```yaml
+- name: Run Beacon Scan
+  run: php artisan beacon:scan || exit 1
+```
+
+### List Available Rules
+
+See all available rules:
+
+```bash
+php artisan beacon:rules
+```
+
+Get details about a specific rule:
+
+```bash
+php artisan beacon:rules --rule=performance.config-cache
+```
+
+### Create Custom Rules
+
+Generate a new rule class:
+
+```bash
+php artisan beacon:make-rule MyCustomRule --category=performance --type=objective
+```
+
+This creates a rule class with proper structure and auto-registers it.
+
 ### Programmatic Usage
 
 ```php
@@ -98,6 +213,35 @@ $summary = $results['summary'];
 $categories = $results['categories'];
 ```
 
+## Rule Types & Severity
+
+Beacon uses a two-dimensional classification system:
+
+### Rule Types
+
+- **Objective Rules** (`type: 'objective'`) - Firm recommendations based on hard facts
+  - Examples: Debug enabled, config not cached, insecure cookies
+  - Beacon can be firm with these
+  
+- **Advisory Rules** (`type: 'advisory'`) - Gentle suggestions based on best practices
+  - Examples: Fat controllers, route closures, folder structure
+  - Beacon should be gentle with these
+
+### Severity Levels
+
+Beacon uses 4 severity levels with numeric weights for scoring:
+
+| Level | Weight | Purpose |
+|-------|--------|---------|
+| `critical` | 100 | Production-breaking / security risk |
+| `high` | 70 | Serious performance or stability issue |
+| `medium` | 40 | Degraded behavior / suboptimal config |
+| `low` | 10 | Minor improvement / suggestion |
+
+**Health Score:** Beacon calculates a health score (0-100%) based on severity weights, giving you a quick overview of your application's status.
+
+All rules can be disabled in `config/beacon.php` if they don't apply to your project.
+
 ## Built-in Rules
 
 ### Performance Rules
@@ -105,16 +249,40 @@ $categories = $results['categories'];
 - **Config Cache**: Checks if config cache is enabled in production
 - **Route Cache**: Checks if route cache is enabled in production
 - **Queue Sync Driver**: Warns about sync queue driver in production
+- **View Cache**: Checks if view cache is enabled
+- **Event Cache**: Checks if event cache is enabled
+- **N+1 Queries**: Detects potential N+1 query problems
+- **Missing Chunking**: Identifies large dataset operations without chunking
 
 ### Security Rules
 
 - **App Debug Enabled**: Critical check for debug mode in production
 - **Insecure Session Driver**: Warns about insecure session drivers
+- **HTTPS Enforcement**: Checks if HTTPS is properly enforced
+- **Cookie Secure Flag**: Verifies secure cookie configuration
 
 ### Architecture Rules
 
 - **Route Closure Usage**: Detects route closures preventing caching
-- **Fat Controller Detection**: Identifies controllers exceeding 300 lines
+- **Large Controller Detection**: Identifies controllers exceeding 300 lines
+- **Direct ENV Usage**: Finds direct `env()` calls that should use `config()`
+- **Queries in Blade**: Detects database queries in Blade templates
+- **Mass Assignment Protection**: Checks for missing `$fillable` or `$guarded`
+- **Logic in Routes**: Identifies complex logic in route files
+- **Direct Instantiation**: Detects `new Class()` usage instead of dependency injection
+- **JS/CSS in Blade**: Finds inline JavaScript and CSS in templates
+- **Magic Strings**: Identifies hardcoded strings that should be constants
+
+### Rule Sources
+
+Beacon's rules are based on authoritative sources and community best practices:
+
+- **[Laravel Official Documentation](https://laravel.com/docs)** - Official Laravel best practices and recommendations
+- **[Laravel Best Practices Guide](https://github.com/alexeymezenin/laravel-best-practices)** - Community-maintained best practices (12.2k+ stars)
+- **Laravel Community Standards** - Widely accepted patterns from the Laravel community
+- **Security Best Practices** - Common security recommendations for Laravel applications
+
+For more details on the sources and rationale behind each rule, see [docs/LARAVEL_BEST_PRACTICES.md](docs/LARAVEL_BEST_PRACTICES.md).
 
 ## Creating Custom Rules
 
@@ -143,7 +311,7 @@ class MyCustomRule extends AbstractRule
 
     public function getSeverity(): string
     {
-        return 'warning';
+        return 'medium';
     }
 
     public function getName(): string
@@ -159,7 +327,7 @@ class MyCustomRule extends AbstractRule
     public function scan(): array
     {
         if ($issueFound) {
-            return $this->fail(
+            return $this->suggest(
                 'Issue description',
                 ['recommendation' => 'How to fix it']
             );

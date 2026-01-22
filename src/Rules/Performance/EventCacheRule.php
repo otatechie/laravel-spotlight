@@ -6,30 +6,9 @@ use AtoAugustine\Beacon\Rules\AbstractRule;
 
 class EventCacheRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'performance.event-cache';
-    }
+    protected ?string $name = 'Event Cache Check';
 
-    public function getCategory(): string
-    {
-        return 'performance';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'Event Cache Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Checks if event cache is enabled in production';
-    }
+    protected string $description = 'Checks if event cache is enabled in production';
 
     public function scan(): array
     {

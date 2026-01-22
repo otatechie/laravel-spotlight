@@ -21,9 +21,9 @@ it('can execute the beacon command', function () {
     $output = Artisan::output();
 
     expect($output)
-        ->toContain('Beacon')
-        ->toContain('Analyzing your application')
-        ->toContain('Scan Results');
+        ->toContain('Laravel Beacon Scan')
+        ->toContain('Summary')
+        ->toContain('Health Score');
 });
 
 it('has package auto-discovery configured in composer.json', function () {

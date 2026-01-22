@@ -7,30 +7,9 @@ use Illuminate\Support\Facades\File;
 
 class MissingServiceLayerRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'architecture.missing-service-layer';
-    }
+    protected ?string $name = 'Service Layer Check';
 
-    public function getCategory(): string
-    {
-        return 'architecture';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'Service Layer Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Checks if application uses service layer pattern for business logic separation';
-    }
+    protected string $description = 'Checks if application uses service layer pattern for business logic separation';
 
     public function scan(): array
     {

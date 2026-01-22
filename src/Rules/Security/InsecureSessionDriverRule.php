@@ -6,30 +6,9 @@ use AtoAugustine\Beacon\Rules\AbstractRule;
 
 class InsecureSessionDriverRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'security.session-driver';
-    }
+    protected ?string $name = 'Session Driver Check';
 
-    public function getCategory(): string
-    {
-        return 'security';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'Session Driver Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Reviews session driver configuration';
-    }
+    protected string $description = 'Reviews session driver configuration';
 
     public function scan(): array
     {

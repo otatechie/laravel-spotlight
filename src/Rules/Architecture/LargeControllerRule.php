@@ -7,30 +7,9 @@ use Illuminate\Support\Facades\File;
 
 class LargeControllerRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'architecture.large-controller';
-    }
+    protected ?string $name = 'Controller Size Check';
 
-    public function getCategory(): string
-    {
-        return 'architecture';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'Controller Size Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Identifies controllers that may benefit from refactoring';
-    }
+    protected string $description = 'Identifies controllers that may benefit from refactoring';
 
     public function scan(): array
     {

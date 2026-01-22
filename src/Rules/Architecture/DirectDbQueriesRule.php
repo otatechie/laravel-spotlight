@@ -7,30 +7,9 @@ use Illuminate\Support\Facades\File;
 
 class DirectDbQueriesRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'architecture.direct-db-queries';
-    }
+    protected ?string $name = 'Direct DB Queries Check';
 
-    public function getCategory(): string
-    {
-        return 'architecture';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'Direct DB Queries Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Identifies direct database queries in controllers that could use repositories or models';
-    }
+    protected string $description = 'Identifies direct database queries in controllers that could use repositories or models';
 
     public function scan(): array
     {

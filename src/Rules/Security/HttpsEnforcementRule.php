@@ -6,30 +6,9 @@ use AtoAugustine\Beacon\Rules\AbstractRule;
 
 class HttpsEnforcementRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'security.https-enforcement';
-    }
+    protected ?string $name = 'HTTPS Enforcement Check';
 
-    public function getCategory(): string
-    {
-        return 'security';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'warning';
-    }
-
-    public function getName(): string
-    {
-        return 'HTTPS Enforcement Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Checks if HTTPS is properly configured for production';
-    }
+    protected string $description = 'Checks if HTTPS is properly configured for production';
 
     public function scan(): array
     {

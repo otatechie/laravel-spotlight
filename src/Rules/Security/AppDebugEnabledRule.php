@@ -6,30 +6,11 @@ use AtoAugustine\Beacon\Rules\AbstractRule;
 
 class AppDebugEnabledRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'security.app-debug-enabled';
-    }
+    protected string $severity = 'critical';
 
-    public function getCategory(): string
-    {
-        return 'security';
-    }
+    protected ?string $name = 'Debug Mode Check';
 
-    public function getSeverity(): string
-    {
-        return 'critical';
-    }
-
-    public function getName(): string
-    {
-        return 'Debug Mode Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Checks if APP_DEBUG is enabled in production';
-    }
+    protected string $description = 'Checks if APP_DEBUG is enabled in production';
 
     public function scan(): array
     {

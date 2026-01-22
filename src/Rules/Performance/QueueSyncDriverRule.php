@@ -6,30 +6,11 @@ use AtoAugustine\Beacon\Rules\AbstractRule;
 
 class QueueSyncDriverRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'performance.queue-sync-driver';
-    }
+    protected string $severity = 'high'; // Serious performance issue
 
-    public function getCategory(): string
-    {
-        return 'performance';
-    }
+    protected ?string $name = 'Queue Driver Check';
 
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'Queue Driver Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Checks if queue is using sync driver in production';
-    }
+    protected string $description = 'Checks if queue is using sync driver in production';
 
     public function scan(): array
     {

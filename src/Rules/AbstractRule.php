@@ -17,9 +17,17 @@ abstract class AbstractRule implements RuleInterface
     protected ?string $category = null;
 
     /**
-     * Severity level - defaults to 'info' if not set
+     * Severity level - defaults to 'low' if not set
+     * Valid levels: critical, high, medium, low
      */
-    protected string $severity = 'info';
+    protected string $severity = 'low';
+
+    /**
+     * Rule type - defaults to 'advisory' if not set
+     * - 'objective': Firm recommendations (security, performance, misconfiguration)
+     * - 'advisory': Gentle suggestions (architecture, style, structure)
+     */
+    protected string $type = 'advisory';
 
     /**
      * Rule name - auto-generated from class name if not set
@@ -65,6 +73,11 @@ abstract class AbstractRule implements RuleInterface
     public function getSeverity(): string
     {
         return $this->severity;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
     }
 
     public function getName(): string
@@ -129,19 +142,10 @@ abstract class AbstractRule implements RuleInterface
             'status' => 'suggestion',
             'message' => $message,
             'severity' => $this->getSeverity(),
+            'type' => $this->getType(),
             'category' => $this->getCategory(),
             'metadata' => $metadata,
         ];
-    }
-
-    /**
-     * Alias for suggest() - for backwards compatibility
-     *
-     * @deprecated Use suggest() instead for neutral messaging
-     */
-    protected function fail(string $message, array $metadata = []): array
-    {
-        return $this->suggest($message, $metadata);
     }
 
     /**
@@ -158,6 +162,7 @@ abstract class AbstractRule implements RuleInterface
             'status' => 'passed',
             'message' => $message ?: "{$this->getName()} check passed",
             'severity' => $this->getSeverity(),
+            'type' => $this->getType(),
             'category' => $this->getCategory(),
             'metadata' => $metadata,
         ];

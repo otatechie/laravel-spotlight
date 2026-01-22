@@ -7,30 +7,9 @@ use Illuminate\Support\Facades\File;
 
 class MissingFormRequestsRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'architecture.missing-form-requests';
-    }
+    protected ?string $name = 'Form Request Usage Check';
 
-    public function getCategory(): string
-    {
-        return 'architecture';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'Form Request Usage Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Identifies controllers that may benefit from using Form Request classes for validation';
-    }
+    protected string $description = 'Identifies controllers that may benefit from using Form Request classes for validation';
 
     public function scan(): array
     {

@@ -6,30 +6,9 @@ use AtoAugustine\Beacon\Rules\AbstractRule;
 
 class ViewCacheRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'performance.view-cache';
-    }
+    protected ?string $name = 'View Cache Check';
 
-    public function getCategory(): string
-    {
-        return 'performance';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'View Cache Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Checks if view cache is enabled in production';
-    }
+    protected string $description = 'Checks if view cache is enabled in production';
 
     public function scan(): array
     {

@@ -19,12 +19,13 @@ class BeaconServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-beacon')
             ->hasConfigFile()
-            ->hasCommand(BeaconCommand::class);
+            ->hasCommand(BeaconCommand::class)
+            ->hasCommand(\AtoAugustine\Beacon\Commands\MakeRuleCommand::class)
+            ->hasCommand(\AtoAugustine\Beacon\Commands\ListRulesCommand::class);
     }
 
     public function packageRegistered(): void
     {
-        // Bind RuleRegistry as singleton
         $this->app->singleton(RuleRegistry::class, function ($app) {
             return new RuleRegistry;
         });
@@ -32,12 +33,15 @@ class BeaconServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        // Register default rules
         $this->registerDefaultRules();
     }
 
     protected function registerDefaultRules(): void
     {
+        if (! config('beacon.enabled', true)) {
+            return;
+        }
+
         $registry = $this->app->make(RuleRegistry::class);
         $config = config('beacon', []);
 
@@ -48,6 +52,8 @@ class BeaconServiceProvider extends PackageServiceProvider
             \AtoAugustine\Beacon\Rules\Performance\QueueSyncDriverRule::class,
             \AtoAugustine\Beacon\Rules\Performance\ViewCacheRule::class,
             \AtoAugustine\Beacon\Rules\Performance\EventCacheRule::class,
+            \AtoAugustine\Beacon\Rules\Performance\NPlusOneQueriesRule::class,
+            \AtoAugustine\Beacon\Rules\Performance\MissingChunkingRule::class,
 
             // Security Rules
             \AtoAugustine\Beacon\Rules\Security\AppDebugEnabledRule::class,
@@ -62,6 +68,13 @@ class BeaconServiceProvider extends PackageServiceProvider
             \AtoAugustine\Beacon\Rules\Architecture\DirectDbQueriesRule::class,
             \AtoAugustine\Beacon\Rules\Architecture\MissingFormRequestsRule::class,
             \AtoAugustine\Beacon\Rules\Architecture\MissingServiceLayerRule::class,
+            \AtoAugustine\Beacon\Rules\Architecture\DirectEnvUsageRule::class,
+            \AtoAugustine\Beacon\Rules\Architecture\QueriesInBladeRule::class,
+            \AtoAugustine\Beacon\Rules\Architecture\MissingMassAssignmentProtectionRule::class,
+            \AtoAugustine\Beacon\Rules\Architecture\LogicInRoutesRule::class,
+            \AtoAugustine\Beacon\Rules\Architecture\DirectInstantiationRule::class,
+            \AtoAugustine\Beacon\Rules\Architecture\JsCssInBladeRule::class,
+            \AtoAugustine\Beacon\Rules\Architecture\MagicStringsRule::class,
         ];
 
         // Register default rules
@@ -72,12 +85,12 @@ class BeaconServiceProvider extends PackageServiceProvider
             // Check if rule is enabled in config
             $enabledRules = $config['enabled_rules'] ?? [];
             if (isset($enabledRules[$ruleId]) && $enabledRules[$ruleId] === false) {
-                continue; // Skip disabled rules
+                continue;
             }
 
-            // Check minimum severity
-            $minimumSeverity = $config['minimum_severity'] ?? 'info';
-            if (! $this->meetsMinimumSeverity($rule->getSeverity(), $minimumSeverity)) {
+            // Check minimum severity threshold
+            $severityThreshold = $config['severity_threshold'] ?? 'low';
+            if (! $this->meetsMinimumSeverity($rule->getSeverity(), $severityThreshold)) {
                 continue;
             }
 
@@ -94,17 +107,18 @@ class BeaconServiceProvider extends PackageServiceProvider
         }
     }
 
-    protected function meetsMinimumSeverity(string $ruleSeverity, string $minimumSeverity): bool
+    protected function meetsMinimumSeverity(string $ruleSeverity, string $severityThreshold): bool
     {
         $severityLevels = [
-            'info' => 1,
-            'warning' => 2,
-            'critical' => 3,
+            'low' => 1,
+            'medium' => 2,
+            'high' => 3,
+            'critical' => 4,
         ];
 
         $ruleLevel = $severityLevels[$ruleSeverity] ?? 1;
-        $minimumLevel = $severityLevels[$minimumSeverity] ?? 1;
+        $thresholdLevel = $severityLevels[$severityThreshold] ?? 1;
 
-        return $ruleLevel >= $minimumLevel;
+        return $ruleLevel >= $thresholdLevel;
     }
 }

@@ -6,30 +6,9 @@ use AtoAugustine\Beacon\Rules\AbstractRule;
 
 class RouteCacheRule extends AbstractRule
 {
-    public function getId(): string
-    {
-        return 'performance.route-cache';
-    }
+    protected ?string $name = 'Route Cache Check';
 
-    public function getCategory(): string
-    {
-        return 'performance';
-    }
-
-    public function getSeverity(): string
-    {
-        return 'info';
-    }
-
-    public function getName(): string
-    {
-        return 'Route Cache Check';
-    }
-
-    public function getDescription(): string
-    {
-        return 'Checks if route cache is enabled in production';
-    }
+    protected string $description = 'Checks if route cache is enabled in production';
 
     public function scan(): array
     {

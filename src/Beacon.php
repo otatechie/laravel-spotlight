@@ -29,6 +29,11 @@ class Beacon
                 'passed' => 0,
                 'suggestions' => 0,
                 'errors' => 0,
+                'critical' => 0,
+                'high' => 0,
+                'medium' => 0,
+                'low' => 0,
+                'health_score' => 100,
             ],
         ];
 
@@ -41,17 +46,19 @@ class Beacon
             $results['rules'][$rule->getId()] = $ruleResult;
             $results['summary']['total_rules']++;
 
-            // Update summary counts
             if ($ruleResult['status'] === 'passed') {
                 $results['summary']['passed']++;
             } elseif ($ruleResult['status'] === 'suggestion' || $ruleResult['status'] === 'failed') {
-                // Support both 'suggestion' (new) and 'failed' (legacy) statuses
                 $results['summary']['suggestions']++;
+
+                $severity = $ruleResult['severity'] ?? 'low';
+                if (in_array($severity, ['critical', 'high', 'medium', 'low'], true)) {
+                    $results['summary'][$severity]++;
+                }
             } elseif ($ruleResult['status'] === 'error') {
                 $results['summary']['errors']++;
             }
 
-            // Group by category
             $category = $rule->getCategory();
             if (! isset($results['categories'][$category])) {
                 $results['categories'][$category] = [
@@ -74,7 +81,42 @@ class Beacon
             }
         }
 
+        $results['summary']['health_score'] = $this->calculateHealthScore($results['summary']);
+
         return $results;
+    }
+
+    /**
+     * Calculate health score based on severity weights
+     *
+     * @param  array<string, mixed>  $summary
+     */
+    protected function calculateHealthScore(array $summary): int
+    {
+        $totalRules = $summary['total_rules'] ?? 0;
+        if ($totalRules === 0) {
+            return 100;
+        }
+
+        $passed = $summary['passed'] ?? 0;
+        $totalIssues = $totalRules - $passed;
+
+        if ($totalIssues === 0) {
+            return 100;
+        }
+
+        // Calculate weighted penalty
+        $penalty = 0;
+        $penalty += ($summary['critical'] ?? 0) * 100;
+        $penalty += ($summary['high'] ?? 0) * 70;
+        $penalty += ($summary['medium'] ?? 0) * 40;
+        $penalty += ($summary['low'] ?? 0) * 10;
+
+        // Normalize to 0-100 scale (assuming worst case: all rules are critical)
+        $maxPenalty = $totalRules * 100;
+        $score = max(0, 100 - (($penalty / $maxPenalty) * 100));
+
+        return (int) round($score);
     }
 
     /**
