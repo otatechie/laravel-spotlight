@@ -43,7 +43,7 @@ workbench/
 /clover.xml
 
 # Documentation
-/docs
+# /docs - Keep docs in repo for users
 
 # OS Files
 Thumbs.db
