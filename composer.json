@@ -2,7 +2,7 @@
     "name": "otatechie/laravel-beacon",
     "description": "A lighthouse-style diagnostics tool that scans Laravel applications for performance, security, and architecture issues.",
     "keywords": [
-        "Ato Augustine",
+        "otatechie",
         "laravel",
         "laravel-beacon"
     ],
@@ -10,7 +10,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Ato Augustine",
+            "name": "otatechie",
             "email": "ato@tuta.com",
             "role": "Developer"
         }
