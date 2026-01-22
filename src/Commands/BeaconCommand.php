@@ -3,7 +3,6 @@
 namespace AtoAugustine\Beacon\Commands;
 
 use AtoAugustine\Beacon\Beacon;
-use AtoAugustine\Beacon\Rules\RuleRegistry;
 use Illuminate\Console\Command;
 
 class BeaconCommand extends Command

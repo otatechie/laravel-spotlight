@@ -35,7 +35,7 @@ class MissingApiResourcesRule extends AbstractRule
     public function scan(): array
     {
         $apiRoutesPath = base_path('routes/api.php');
-        
+
         if (! File::exists($apiRoutesPath)) {
             return $this->pass('API routes file not found');
         }

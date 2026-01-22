@@ -26,7 +26,7 @@ class BeaconServiceProvider extends PackageServiceProvider
     {
         // Bind RuleRegistry as singleton
         $this->app->singleton(RuleRegistry::class, function ($app) {
-            return new RuleRegistry();
+            return new RuleRegistry;
         });
     }
 

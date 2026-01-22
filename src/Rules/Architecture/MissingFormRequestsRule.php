@@ -36,7 +36,7 @@ class MissingFormRequestsRule extends AbstractRule
     {
         $controllersPath = app_path('Http/Controllers');
         $formRequestsPath = app_path('Http/Requests');
-        
+
         if (! File::exists($controllersPath)) {
             return $this->pass('Controllers directory not found');
         }
@@ -47,10 +47,10 @@ class MissingFormRequestsRule extends AbstractRule
 
         foreach ($controllers as $controller) {
             $content = File::get($controller->getPathname());
-            
+
             // Check for validation patterns (Request::validate, $request->validate, Validator::make)
             $hasValidation = preg_match('/(\$request->validate|Request::validate|Validator::make)/i', $content);
-            
+
             if ($hasValidation) {
                 $controllersWithValidation[] = [
                     'file' => $controller->getRelativePathname(),

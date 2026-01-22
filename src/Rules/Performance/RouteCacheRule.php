@@ -37,7 +37,7 @@ class RouteCacheRule extends AbstractRule
             return $this->pass('Not in production environment');
         }
 
-        $routeCached = file_exists(base_path('bootstrap/cache/routes-v7.php')) 
+        $routeCached = file_exists(base_path('bootstrap/cache/routes-v7.php'))
             || file_exists(base_path('bootstrap/cache/routes.php'));
 
         if (! $routeCached) {

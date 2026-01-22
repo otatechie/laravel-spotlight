@@ -36,9 +36,9 @@ class MissingServiceLayerRule extends AbstractRule
     {
         $servicesPath = app_path('Services');
         $controllersPath = app_path('Http/Controllers');
-        
+
         $hasServices = File::exists($servicesPath) && count(File::allFiles($servicesPath)) > 0;
-        
+
         if (! File::exists($controllersPath)) {
             return $this->pass('Controllers directory not found');
         }
@@ -48,20 +48,20 @@ class MissingServiceLayerRule extends AbstractRule
 
         foreach ($controllers as $controller) {
             $content = File::get($controller->getPathname());
-            
+
             // Check for complex business logic patterns
             // Look for multiple method calls, conditionals, loops that suggest business logic
             $complexity = 0;
-            
+
             // Count method calls (excluding standard Laravel methods)
             preg_match_all('/->(?!get|post|put|patch|delete|all|input|has|exists|validate|route|redirect|view|json|response)(\w+)\(/i', $content, $methodMatches);
             $complexity += count($methodMatches[0]);
-            
+
             // Count conditionals and loops
             $complexity += substr_count($content, 'if (');
             $complexity += substr_count($content, 'foreach');
             $complexity += substr_count($content, 'while');
-            
+
             // If controller has significant complexity, it might benefit from services
             if ($complexity > 10) {
                 $lineCount = substr_count($content, "\n") + 1;

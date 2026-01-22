@@ -35,7 +35,7 @@ class LargeControllerRule extends AbstractRule
     public function scan(): array
     {
         $controllersPath = app_path('Http/Controllers');
-        
+
         if (! File::exists($controllersPath)) {
             return $this->pass('Controllers directory not found');
         }
@@ -47,7 +47,7 @@ class LargeControllerRule extends AbstractRule
         foreach ($controllers as $controller) {
             $content = File::get($controller->getPathname());
             $lineCount = substr_count($content, "\n") + 1;
-            
+
             if ($lineCount > $threshold) {
                 $largeControllers[] = [
                     'file' => $controller->getRelativePathname(),

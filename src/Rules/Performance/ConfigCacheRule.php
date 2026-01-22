@@ -8,8 +8,9 @@ class ConfigCacheRule extends AbstractRule
 {
     // All properties auto-detected from class name and namespace!
     // Only override what's different:
-    
+
     protected ?string $name = 'Config Cache Check';
+
     protected string $description = 'Checks if config cache is enabled in production';
     // id: auto-generated as 'performance.config-cache'
     // category: auto-detected as 'performance' from namespace

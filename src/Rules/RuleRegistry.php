@@ -2,8 +2,6 @@
 
 namespace AtoAugustine\Beacon\Rules;
 
-use Illuminate\Support\Collection;
-
 class RuleRegistry
 {
     /**
@@ -60,7 +58,6 @@ class RuleRegistry
     /**
      * Get rules by category
      *
-     * @param  string  $category
      * @return array<string, RuleInterface>
      */
     public function byCategory(string $category): array
@@ -74,7 +71,6 @@ class RuleRegistry
     /**
      * Get rules by severity
      *
-     * @param  string  $severity
      * @return array<string, RuleInterface>
      */
     public function bySeverity(string $severity): array
@@ -87,9 +83,6 @@ class RuleRegistry
 
     /**
      * Get a specific rule by ID
-     *
-     * @param  string  $id
-     * @return RuleInterface|null
      */
     public function get(string $id): ?RuleInterface
     {
@@ -98,9 +91,6 @@ class RuleRegistry
 
     /**
      * Check if a rule is registered
-     *
-     * @param  string  $id
-     * @return bool
      */
     public function has(string $id): bool
     {

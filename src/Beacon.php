@@ -10,8 +10,7 @@ class Beacon
 {
     public function __construct(
         protected RuleRegistry $registry
-    ) {
-    }
+    ) {}
 
     /**
      * Scan the Laravel application for insights
@@ -81,7 +80,6 @@ class Beacon
     /**
      * Execute a rule safely with error handling
      *
-     * @param  RuleInterface  $rule
      * @return array<string, mixed>
      */
     protected function executeRule(RuleInterface $rule): array
@@ -121,8 +119,6 @@ class Beacon
     /**
      * Get default error result when a rule throws an exception
      *
-     * @param  RuleInterface  $rule
-     * @param  \Throwable  $exception
      * @return array<string, mixed>
      */
     protected function getErrorResult(RuleInterface $rule, \Throwable $exception): array
