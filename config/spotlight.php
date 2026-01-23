@@ -44,16 +44,12 @@ return [
         'architecture.route-closure-usage' => true,
         'architecture.large-controller' => true,
         'architecture.missing-api-resources' => true,
-        'architecture.direct-db-queries' => true,
         'architecture.missing-form-requests' => true,
-        'architecture.missing-service-layer' => true,
         'architecture.direct-env-usage' => true,
         'architecture.queries-in-blade' => true,
         'architecture.missing-mass-assignment-protection' => true,
         'architecture.logic-in-routes' => true,
-        'architecture.direct-instantiation' => true,
         'architecture.js-css-in-blade' => true,
-        'architecture.magic-strings' => true,
     ],
 
     /*
@@ -148,5 +144,22 @@ return [
         'performance' => 'Performance',
         'security' => 'Security',
         'architecture' => 'Architecture',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rule Thresholds
+    |--------------------------------------------------------------------------
+    |
+    | Configure thresholds for specific rules. Rules will use these values
+    | instead of their defaults, allowing project-specific customization.
+    |
+    */
+    'thresholds' => [
+        // Maximum lines before a controller is considered "large"
+        'architecture.large-controller' => 300,
+
+        // Maximum nested levels in route files before suggesting refactoring
+        'architecture.logic-in-routes' => 2,
     ],
 ];

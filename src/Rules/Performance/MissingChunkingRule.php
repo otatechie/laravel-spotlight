@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 
 class MissingChunkingRule extends AbstractRule
 {
-    protected string $severity = 'high'; // Serious performance issue
+    protected ?string $severity = 'high'; // Serious performance issue
 
     protected ?string $name = 'Missing Chunking for Large Datasets';
 

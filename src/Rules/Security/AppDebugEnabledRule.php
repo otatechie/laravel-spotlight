@@ -6,7 +6,7 @@ use Otatechie\Spotlight\Rules\AbstractRule;
 
 class AppDebugEnabledRule extends AbstractRule
 {
-    protected string $severity = 'critical';
+    protected ?string $severity = 'critical';
 
     protected ?string $name = 'Debug Mode Check';
 

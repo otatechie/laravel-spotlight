@@ -6,7 +6,7 @@ use Otatechie\Spotlight\Rules\AbstractRule;
 
 class QueueSyncDriverRule extends AbstractRule
 {
-    protected string $severity = 'high'; // Serious performance issue
+    protected ?string $severity = 'high'; // Serious performance issue
 
     protected ?string $name = 'Queue Driver Check';
 

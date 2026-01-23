@@ -79,16 +79,12 @@ class SpotlightServiceProvider extends PackageServiceProvider
             \Otatechie\Spotlight\Rules\Architecture\RouteClosureUsageRule::class,
             \Otatechie\Spotlight\Rules\Architecture\LargeControllerRule::class,
             \Otatechie\Spotlight\Rules\Architecture\MissingApiResourcesRule::class,
-            \Otatechie\Spotlight\Rules\Architecture\DirectDbQueriesRule::class,
             \Otatechie\Spotlight\Rules\Architecture\MissingFormRequestsRule::class,
-            \Otatechie\Spotlight\Rules\Architecture\MissingServiceLayerRule::class,
             \Otatechie\Spotlight\Rules\Architecture\DirectEnvUsageRule::class,
             \Otatechie\Spotlight\Rules\Architecture\QueriesInBladeRule::class,
             \Otatechie\Spotlight\Rules\Architecture\MissingMassAssignmentProtectionRule::class,
             \Otatechie\Spotlight\Rules\Architecture\LogicInRoutesRule::class,
-            \Otatechie\Spotlight\Rules\Architecture\DirectInstantiationRule::class,
             \Otatechie\Spotlight\Rules\Architecture\JsCssInBladeRule::class,
-            \Otatechie\Spotlight\Rules\Architecture\MagicStringsRule::class,
         ];
 
         // Register default rules

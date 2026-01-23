@@ -191,6 +191,11 @@ class SpotlightCommand extends Command
         if (isset($ruleResult['metadata']['recommendation'])) {
             $this->comment("→ {$ruleResult['metadata']['recommendation']}");
         }
+
+        // Show documentation URL if available
+        if (isset($ruleResult['metadata']['documentation_url'])) {
+            $this->line("  <fg=blue>📖 Learn more: {$ruleResult['metadata']['documentation_url']}</>");
+        }
     }
 
     protected function displayFileLocations(array $metadata): void

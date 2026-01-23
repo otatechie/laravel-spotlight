@@ -105,7 +105,7 @@ This document lists authoritative sources for Laravel architecture best practice
 ### 3. Direct DB Queries in Controllers
 - **Problem**: Business logic mixed with data access
 - **Solution**: Use repositories or models
-- **Rule**: `DirectDbQueriesRule` ✅ (already implemented)
+- **Note**: This is context-dependent and not universally applicable
 
 ### 4. Missing Form Requests
 - **Problem**: Validation logic in controllers
@@ -130,7 +130,7 @@ This document lists authoritative sources for Laravel architecture best practice
 ### 8. Missing Service Layer
 - **Problem**: No separation between controllers and models
 - **Solution**: Create service classes
-- **Rule**: `MissingServiceLayerRule` ✅ (already implemented)
+- **Note**: This is an architectural choice, not universally required
 
 ### 9. Global Scopes Overuse
 - **Problem**: Too many global scopes can cause unexpected behavior
@@ -156,14 +156,14 @@ This document lists authoritative sources for Laravel architecture best practice
 
 ### ✅ Already Implemented
 
-1. **Direct DB Queries in Controllers** - `DirectDbQueriesRule`
-2. **Missing Form Requests** - `MissingFormRequestsRule`
-3. **Missing Service Layer** - `MissingServiceLayerRule`
-4. **N+1 Query Problems** - `NPlusOneQueriesRule`
-5. **Direct ENV Usage** - `DirectEnvUsageRule` ✅ (new)
-6. **Queries in Blade Templates** - `QueriesInBladeRule` ✅ (new)
-7. **Missing Mass Assignment Protection** - `MissingMassAssignmentProtectionRule` ✅ (new)
-8. **Logic in Routes** - `LogicInRoutesRule` ✅ (new)
+1. **Missing Form Requests** - `MissingFormRequestsRule`
+2. **N+1 Query Problems** - `NPlusOneQueriesRule`
+3. **Direct ENV Usage** - `DirectEnvUsageRule`
+4. **Queries in Blade Templates** - `QueriesInBladeRule`
+5. **Missing Mass Assignment Protection** - `MissingMassAssignmentProtectionRule`
+6. **Logic in Routes** - `LogicInRoutesRule`
+7. **Large Controllers** - `LargeControllerRule`
+8. **Route Closures** - `RouteClosureUsageRule`
 
 ### Medium Priority
 

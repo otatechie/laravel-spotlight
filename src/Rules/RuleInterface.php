@@ -37,6 +37,11 @@ interface RuleInterface
     public function getDescription(): string;
 
     /**
+     * Get the documentation URL for this rule (optional)
+     */
+    public function getDocumentationUrl(): ?string;
+
+    /**
      * Execute the rule and return result
      *
      * @return array<string, mixed>

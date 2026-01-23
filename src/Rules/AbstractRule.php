@@ -17,10 +17,12 @@ abstract class AbstractRule implements RuleInterface
     protected ?string $category = null;
 
     /**
-     * Severity level - defaults to 'low' if not set
-     * Valid levels: critical, high, medium, low
+     * Severity level - if not set, uses category-based defaults:
+     * - security: high
+     * - performance: medium
+     * - architecture: low
      */
-    protected string $severity = 'low';
+    protected ?string $severity = null;
 
     /**
      * Rule type - defaults to 'advisory' if not set
@@ -38,6 +40,11 @@ abstract class AbstractRule implements RuleInterface
      * Rule description - optional, defaults to empty string
      */
     protected string $description = '';
+
+    /**
+     * Documentation URL - optional link to detailed documentation
+     */
+    protected ?string $documentationUrl = null;
 
     public function getId(): string
     {
@@ -72,7 +79,17 @@ abstract class AbstractRule implements RuleInterface
 
     public function getSeverity(): string
     {
-        return $this->severity;
+        if ($this->severity !== null) {
+            return $this->severity;
+        }
+
+        // Category-based defaults
+        return match ($this->getCategory()) {
+            'security' => 'high',
+            'performance' => 'medium',
+            'architecture' => 'low',
+            default => 'low',
+        };
     }
 
     public function getType(): string
@@ -97,6 +114,14 @@ abstract class AbstractRule implements RuleInterface
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    /**
+     * Get the documentation URL for this rule
+     */
+    public function getDocumentationUrl(): ?string
+    {
+        return $this->documentationUrl;
     }
 
     /**
@@ -137,6 +162,11 @@ abstract class AbstractRule implements RuleInterface
      */
     protected function suggest(string $message, array $metadata = []): array
     {
+        // Include documentation URL if available
+        if ($this->getDocumentationUrl() !== null && ! isset($metadata['documentation_url'])) {
+            $metadata['documentation_url'] = $this->getDocumentationUrl();
+        }
+
         return [
             'id' => $this->getId(),
             'status' => 'suggestion',
