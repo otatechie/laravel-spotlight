@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 
 class NPlusOneQueriesRule extends AbstractRule
 {
-    protected string $severity = 'high'; // Serious performance issue
+    protected ?string $severity = 'high'; // Serious performance issue
 
     protected ?string $name = 'N+1 Query Detection';
 

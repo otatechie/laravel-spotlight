@@ -1,6 +1,6 @@
 # Creating Custom Rules for Laravel Spotlight
 
-This guide will help you create custom rules for Laravel Spotlight to scan your application for specific issues.
+Learn how to create custom rules for Laravel Spotlight.
 
 ## Rule Structure
 

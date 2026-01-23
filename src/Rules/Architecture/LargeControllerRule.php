@@ -21,7 +21,7 @@ class LargeControllerRule extends AbstractRule
 
         $controllers = File::allFiles($controllersPath);
         $largeControllers = [];
-        $threshold = 300; // lines
+        $threshold = config('spotlight.thresholds.architecture.large-controller', 300);
 
         foreach ($controllers as $controller) {
             $content = File::get($controller->getPathname());

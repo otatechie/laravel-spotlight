@@ -2,5 +2,5 @@ parameters:
     ignoreErrors:
         -
             message: "#^Called 'env' outside of the config directory#"
-            path: config/beacon.php
+            path: config/spotlight.php
             count: 1

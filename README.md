@@ -16,11 +16,11 @@ A lighthouse-style diagnostics tool that scans Laravel applications for performa
 
 **Spotlight IS:**
 - ✅ **Diagnostic Scanner** - Identifies potential issues before they become problems
-- ✅ **Best Practices Advisor** - Suggests improvements based on Laravel best practices
-- ✅ **Performance Analyzer** - Detects performance bottlenecks and optimization opportunities
+- ✅ **Best Practices Advisor** - Points out improvements based on Laravel best practices
+- ✅ **Performance Analyzer** - Finds performance bottlenecks and optimization opportunities
 - ✅ **Security Auditor** - Flags security vulnerabilities and misconfigurations
-- ✅ **Architecture Mentor** - Provides gentle guidance on code organization and structure
-- ✅ **Guidance Tool** - Offers suggestions, not enforcement (you're in control)
+- ✅ **Architecture Mentor** - Gives gentle tips on code organization
+- ✅ **Guidance Tool** - Just suggestions, you're in control
 
 Laravel Spotlight helps you identify and fix issues in your Laravel application before they become problems. It scans your application for:
 
@@ -32,25 +32,27 @@ Laravel Spotlight helps you identify and fix issues in your Laravel application 
 
 **Spotlight provides guidance, not enforcement. No shaming, no judgment.**
 
-Laravel Spotlight is designed as a **friendly mentor**, not an angry linter. We believe in helping developers improve their code through gentle suggestions, not through shame or rigid enforcement.
+Laravel Spotlight is a **friendly mentor**, not an angry linter. We help you improve your code with gentle suggestions, not shame or rigid rules.
 
 - **No Shaming** - We use "could improve" and "consider" instead of "MUST fix" or "WRONG"
 - **User Control** - Every rule can be disabled if it doesn't fit your project
 - **Objective vs Advisory** - Security/performance issues are flagged firmly; architecture suggestions are gentle
 - **Fast & Lightweight** - Executes in < 1 second using lightweight checks
 
-See [Why Spotlight?](docs/WHY_SPOTLIGHT.md) for a detailed comparison with other tools.
+See [Why Spotlight?](docs/WHY_SPOTLIGHT.md) to see how it compares to other tools.
 
 ## Features
 
-- 🔍 **Comprehensive Scanning** - 25+ built-in rules covering performance, security, and architecture
+- 🔍 **20 Built-in Rules** - Covers performance, security, and architecture
 - 🧩 **Modular Rule System** - Easy to extend with custom rules (auto-detection eliminates boilerplate)
 - ⚙️ **Full User Control** - Enable/disable any rule that doesn't fit your project
 - 🎯 **Severity Scoring** - 4-level severity system with health score calculation
 - ⚡ **Lightning Fast** - Executes in < 1 second
-- 🛡️ **Error Handling** - Robust error handling prevents single rule failures from crashing scans
+- 🛡️ **Error Handling** - One rule failure won't crash the entire scan
 - 📊 **Multiple Output Formats** - Table and JSON output formats
 - 🛠️ **Developer Tools** - Rule generator, rule listing, CI/CD exit codes
+- 📖 **Documentation URLs** - Rules can link to detailed documentation
+- 🎨 **PHP 8.1+ Enums** - Type-safe severity and rule type enums
 
 
 ## Installation
@@ -58,7 +60,7 @@ See [Why Spotlight?](docs/WHY_SPOTLIGHT.md) for a detailed comparison with other
 You can install the package via composer:
 
 ```bash
-composer require otatechie/laravel-spotlight
+composer require otatechie/laravel-beacon
 ```
 
 You can publish the config file with:
@@ -67,7 +69,7 @@ You can publish the config file with:
 php artisan vendor:publish --tag="spotlight-config"
 ```
 
-The config file includes options for:
+The config file lets you:
 
 - Enabling/disabling specific rules
 - Registering custom rules
@@ -117,7 +119,7 @@ php artisan spotlight:scan --severity=critical
 
 ### Exit Codes for CI/CD
 
-Spotlight uses a sophisticated exit code system for CI/CD integration:
+Spotlight uses exit codes for CI/CD integration:
 
 **Exit Code Mapping:**
 - `0` - No issues found (clean scan)
@@ -207,10 +209,15 @@ Spotlight uses 4 severity levels with numeric weights for scoring:
 |-------|--------|---------|
 | `critical` | 100 | Production-breaking / security risk |
 | `high` | 70 | Serious performance or stability issue |
-| `medium` | 40 | Degraded behavior / suboptimal config |
+| `medium` | 40 | Performance issues or config problems |
 | `low` | 10 | Minor improvement / suggestion |
 
 **Health Score:** Spotlight calculates a health score (0-100%) based on severity weights, giving you a quick overview of your application's status.
+
+**Category-Based Defaults:** If a rule doesn't specify severity, it inherits from its category:
+- Security rules default to `high`
+- Performance rules default to `medium`
+- Architecture rules default to `low`
 
 All rules can be disabled in `config/spotlight.php` if they don't apply to your project.
 
@@ -236,27 +243,23 @@ All rules can be disabled in `config/spotlight.php` if they don't apply to your 
 ### Architecture Rules
 
 - **Route Closure Usage**: Detects route closures preventing caching
-- **Large Controller Detection**: Identifies controllers exceeding 300 lines
+- **Large Controller Detection**: Identifies controllers exceeding configurable line threshold
 - **Missing API Resources**: Detects API routes without API resources
-- **Direct DB Queries**: Identifies direct database queries in controllers
 - **Missing Form Requests**: Detects controllers using inline validation instead of Form Requests
-- **Missing Service Layer**: Identifies controllers with business logic that should be in services
 - **Direct ENV Usage**: Finds direct `env()` calls that should use `config()`
 - **Queries in Blade**: Detects database queries in Blade templates
 - **Mass Assignment Protection**: Checks for missing `$fillable` or `$guarded`
 - **Logic in Routes**: Identifies complex logic in route files
-- **Direct Instantiation**: Detects `new Class()` usage instead of dependency injection
 - **JS/CSS in Blade**: Finds inline JavaScript and CSS in templates
-- **Magic Strings**: Identifies hardcoded strings that should be constants
 
 
 ## Creating Custom Rules
 
-Laravel Spotlight makes it easy to create your own custom rules. See the [Creating Rules Guide](docs/CREATING_RULES.md) for detailed instructions.
+Want to add your own rules? It's easy. Check out the [Creating Rules Guide](docs/CREATING_RULES.md) for the full walkthrough.
 
 ### Quick Example
 
-Using Spotlight's clean auto-detection approach:
+Here's how simple it is:
 
 ```php
 <?php
@@ -268,12 +271,14 @@ use Otatechie\Spotlight\Rules\AbstractRule;
 class MyCustomRule extends AbstractRule
 {
     // Only define what's different - everything else is auto-detected!
-    protected string $severity = 'medium';
+    protected ?string $severity = 'medium'; // Or leave null for category-based default
     protected string $description = 'Checks for a specific issue';
+    protected ?string $documentationUrl = 'https://example.com/docs/my-rule';
     
     // id: auto-generated as 'performance.my-custom'
     // category: auto-detected as 'performance' from namespace
     // name: auto-generated as 'My Custom' from class name
+    // severity: defaults to 'medium' (performance category default)
 
     public function scan(): array
     {
@@ -312,6 +317,7 @@ Key configuration options:
 - `enabled_rules` - Enable/disable specific rules
 - `custom_rules` - Register your own custom rules
 - `severity_threshold` - Filter rules by severity level
+- `thresholds` - Customize rule-specific thresholds (e.g., controller line limits)
 - `debug` - Enable debug logging
 - `error_handling` - Control error handling behavior
 
